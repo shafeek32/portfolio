@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
+import { LoadingScreen } from './components/LoadingScreen';
 import { BackgroundNetwork } from './components/BackgroundNetwork';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
@@ -16,45 +18,78 @@ import { ResumeModal } from './components/ResumeModal';
 import { Project } from './types';
 
 export function App() {
+  const [isLoading, setIsLoading] = useState(true);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isResumeModalOpen, setIsResumeModalOpen] = useState(false);
 
+  // Ensure page always starts at the very top on initial load / refresh
+  useEffect(() => {
+    // Disable browser automatic scroll restoration
+    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
+      window.history.scrollRestoration = 'manual';
+    }
+
+    // Scroll to top immediately
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+  }, []);
+
+  const handleLoadingComplete = () => {
+    setIsLoading(false);
+    // Guarantee top position when loading finishes and homepage reveals
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
+  };
+
   return (
-    <div className="relative min-h-screen bg-background text-text-primary overflow-x-hidden">
-      {/* Living Digital Network Background Layer */}
-      <BackgroundNetwork />
+    <>
+      {/* Initial Animated Developer Splash / Loading Screen */}
+      <AnimatePresence mode="wait">
+        {isLoading && (
+          <LoadingScreen onComplete={handleLoadingComplete} />
+        )}
+      </AnimatePresence>
 
-      {/* Navigation */}
-      <Navbar onResumeClick={() => setIsResumeModalOpen(true)} />
+      <div className="relative min-h-screen bg-background text-text-primary overflow-x-hidden">
+        {/* Living Digital Network Background Layer */}
+        <BackgroundNetwork />
 
-      {/* Main Page Content */}
-      <main className="relative z-10">
-        <Hero onResumeClick={() => setIsResumeModalOpen(true)} />
-        <About />
-        <Skills />
-        <Projects onViewProjectDetails={(project) => setSelectedProject(project)} />
-        <Experience />
-        <Certifications />
-        <Cybersecurity onResumeClick={() => setIsResumeModalOpen(true)} />
-        <GithubActivity />
-        <Contact />
-      </main>
+        {/* Navigation */}
+        <Navbar onResumeClick={() => setIsResumeModalOpen(true)} />
 
-      {/* Footer */}
-      <Footer />
+        {/* Main Page Content */}
+        <motion.main
+          className="relative z-10"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+        >
+          <Hero onResumeClick={() => setIsResumeModalOpen(true)} />
+          <About />
+          <Skills />
+          <Projects onViewProjectDetails={(project) => setSelectedProject(project)} />
+          <Experience />
+          <Certifications />
+          <Cybersecurity onResumeClick={() => setIsResumeModalOpen(true)} />
+          <GithubActivity />
+          <Contact />
+        </motion.main>
 
-      {/* Modals */}
-      <ProjectModal
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-      />
+        {/* Footer */}
+        <Footer />
 
-      <ResumeModal
-        isOpen={isResumeModalOpen}
-        onClose={() => setIsResumeModalOpen(false)}
-      />
-    </div>
+        {/* Modals */}
+        <ProjectModal
+          project={selectedProject}
+          onClose={() => setSelectedProject(null)}
+        />
+
+        <ResumeModal
+          isOpen={isResumeModalOpen}
+          onClose={() => setIsResumeModalOpen(false)}
+        />
+      </div>
+    </>
   );
 }
 
 export default App;
+

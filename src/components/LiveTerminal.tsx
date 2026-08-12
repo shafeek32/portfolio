@@ -23,11 +23,19 @@ export const LiveTerminal: React.FC<LiveTerminalProps> = ({ onResumeClick }) => 
   const [historyIndex, setHistoryIndex] = useState<number>(-1);
 
   const terminalEndRef = useRef<HTMLDivElement>(null);
+  const outputContainerRef = useRef<HTMLDivElement>(null);
+  const isInitialMount = useRef(true);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Auto-scroll to bottom whenever history updates
+  // Auto-scroll to bottom only inside the terminal output container when history updates
   useEffect(() => {
-    terminalEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      return;
+    }
+    if (outputContainerRef.current) {
+      outputContainerRef.current.scrollTop = outputContainerRef.current.scrollHeight;
+    }
   }, [terminalHistory]);
 
   const promptPrefix = `shafeek@portfolio:${vfs.formatPromptPath(currentPath)}$`;
@@ -197,7 +205,10 @@ export const LiveTerminal: React.FC<LiveTerminalProps> = ({ onResumeClick }) => 
       </div>
 
       {/* Terminal Output Area */}
-      <div className="p-4 sm:p-6 h-72 sm:h-80 overflow-y-auto font-mono text-xs text-text-secondary space-y-1.5 selection:bg-emerald-500/30 selection:text-emerald-200">
+      <div
+        ref={outputContainerRef}
+        className="p-4 sm:p-6 h-72 sm:h-80 overflow-y-auto font-mono text-xs text-text-secondary space-y-1.5 selection:bg-emerald-500/30 selection:text-emerald-200"
+      >
         {terminalHistory.map((line, idx) => (
           <div
             key={idx}
