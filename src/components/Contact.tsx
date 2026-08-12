@@ -15,6 +15,7 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { ContactFormData } from '../types';
+import { supabase } from '../utils/supabase';
 
 export const Contact: React.FC = () => {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -69,11 +70,22 @@ export const Contact: React.FC = () => {
     setStatus('submitting');
 
     try {
-      // NOTE: This is structured for easy future Supabase integration:
-      // const { data, error } = await supabase.from('messages').insert([formData]);
-      
-      // Simulate network request
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      if (supabase) {
+        const { error } = await supabase.from('messages').insert([
+          {
+            name: formData.name.trim(),
+            email: formData.email.trim(),
+            subject: (formData.subject || '').trim() || 'No Subject',
+            message: formData.message.trim(),
+            created_at: new Date().toISOString()
+          }
+        ]);
+
+        if (error) throw error;
+      } else {
+        // Fallback simulation when Supabase credentials are not set in .env
+        await new Promise((resolve) => setTimeout(resolve, 800));
+      }
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
@@ -85,9 +97,10 @@ export const Contact: React.FC = () => {
         origin: { y: 0.8 },
         colors: ['#06b6d4', '#10b981', '#6366f1']
       });
-    } catch {
+    } catch (err: unknown) {
       setStatus('error');
-      setErrorMessage('Something went wrong. Please try emailing directly.');
+      const errObj = err as { message?: string };
+      setErrorMessage(errObj?.message || 'Something went wrong. Please try emailing directly.');
     }
   };
 
