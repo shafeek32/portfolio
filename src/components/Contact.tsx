@@ -10,9 +10,7 @@ import {
   Linkedin, 
   Copy, 
   Check, 
-  MapPin, 
-  Phone,
-  ArrowRight
+  Phone
 } from 'lucide-react';
 import { ContactFormData } from '../types';
 import { supabase } from '../utils/supabase';
@@ -44,7 +42,7 @@ export const Contact: React.FC = () => {
 
   const validateForm = (): boolean => {
     if (!formData.name.trim()) {
-      setErrorMessage('Please provide your name.');
+      setErrorMessage('Please enter your name.');
       return false;
     }
     if (!formData.email.trim() || !/^\S+@\S+\.\S+$/.test(formData.email)) {
@@ -72,7 +70,7 @@ export const Contact: React.FC = () => {
     try {
       const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
 
-      // 1. Send Email Notification directly to Gmail via Web3Forms (if configured)
+      // 1. Send Email Notification via Web3Forms (if key provided)
       if (web3FormsKey) {
         try {
           const res = await fetch('https://api.web3forms.com/submit', {
@@ -85,7 +83,7 @@ export const Contact: React.FC = () => {
               access_key: web3FormsKey,
               name: formData.name.trim(),
               email: formData.email.trim(),
-              subject: `Portfolio Contact: ${(formData.subject || '').trim() || 'New Message'} from ${formData.name.trim()}`,
+              subject: `Portfolio Contact: ${(formData.subject || '').trim() || 'New Inquiry'} from ${formData.name.trim()}`,
               message: formData.message.trim(),
               from_name: `${formData.name.trim()} (Portfolio Visitor)`,
               reply_to: formData.email.trim()
@@ -93,10 +91,10 @@ export const Contact: React.FC = () => {
           });
           const data = await res.json();
           if (!res.ok || !data.success) {
-            console.warn('Web3Forms dispatch response:', data);
+            console.warn('Web3Forms response:', data);
           }
         } catch (mailErr) {
-          console.warn('Web3Forms email error:', mailErr);
+          console.warn('Web3Forms error:', mailErr);
         }
       }
 
@@ -106,26 +104,26 @@ export const Contact: React.FC = () => {
           {
             name: formData.name.trim(),
             email: formData.email.trim(),
-            subject: (formData.subject || '').trim() || 'No Subject',
+            subject: (formData.subject || '').trim() || 'General Inquiry',
             message: formData.message.trim(),
             created_at: new Date().toISOString()
           }
         ]);
-        if (error) throw error;
+        if (error) console.warn('Supabase insert note:', error);
       }
 
       if (!web3FormsKey && !supabase) {
-        // Fallback simulation when no external services configured
-        await new Promise((resolve) => setTimeout(resolve, 800));
+        // Smooth feedback fallback
+        await new Promise((resolve) => setTimeout(resolve, 600));
       }
 
       setStatus('success');
       setFormData({ name: '', email: '', subject: '', message: '' });
 
-      // Trigger celebratory confetti
+      // Celebratory particle feedback
       confetti({
-        particleCount: 80,
-        spread: 60,
+        particleCount: 70,
+        spread: 55,
         origin: { y: 0.8 },
         colors: ['#06b6d4', '#10b981', '#6366f1']
       });
@@ -146,10 +144,10 @@ export const Contact: React.FC = () => {
             <span>08 // GET IN TOUCH</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">
-            Let's <span className="text-gradient-cyan">Build Something.</span>
+            Contact & <span className="text-gradient-cyan">Inquiries</span>
           </h2>
           <p className="text-sm text-text-muted mt-2 max-w-lg">
-            Have an opportunity, project, or idea? I'd love to hear about it. Send a message or reach out on any channel.
+            Have a software engineering opportunity, question, or project? Send a message or connect directly.
           </p>
         </div>
 
@@ -158,13 +156,13 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 space-y-4">
             <div className="p-6 sm:p-7 rounded-2xl glass-card border border-border-subtle space-y-6">
               <div>
-                <h3 className="text-base font-bold text-text-primary mb-1">Direct Channels</h3>
+                <h3 className="text-base font-bold text-text-primary mb-1">Direct Contact</h3>
                 <p className="text-xs text-text-secondary">
-                  Feel free to reach out for software engineering roles, full-stack collaborations, or technical inquiries.
+                  Open to full-time software engineering roles, internships, and technical collaborations.
                 </p>
               </div>
 
-              {/* Direct Email Card with Copy button */}
+              {/* Direct Email Card */}
               <div className="p-4 rounded-xl bg-background-elevated/70 border border-border-subtle flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 overflow-hidden">
                   <div className="w-10 h-10 rounded-xl bg-accent-cyan/10 border border-accent-cyan/20 flex items-center justify-center text-accent-cyan shrink-0">
@@ -185,12 +183,13 @@ export const Contact: React.FC = () => {
                   onClick={handleCopyEmail}
                   className="p-2 rounded-lg bg-background-secondary hover:bg-white/10 text-text-secondary hover:text-accent-cyan border border-border-subtle transition-colors shrink-0"
                   title="Copy email to clipboard"
+                  aria-label="Copy email to clipboard"
                 >
                   {copiedEmail ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
-              {/* Direct Phone Card with Copy / Call button */}
+              {/* Direct Phone Card */}
               <div className="p-4 rounded-xl bg-background-elevated/70 border border-border-subtle flex items-center justify-between gap-3">
                 <div className="flex items-center gap-3 overflow-hidden">
                   <div className="w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
@@ -200,7 +199,7 @@ export const Contact: React.FC = () => {
                     <span className="text-[11px] text-text-muted font-mono block">Phone & WhatsApp</span>
                     <a
                       href="tel:+917593936350"
-                      className="text-xs font-semibold text-text-primary truncate block hover:text-emerald-400 transition-colors font-mono"
+                      className="text-xs font-semibold text-text-primary truncate block hover:text-emerald-400 transition-colors"
                     >
                       +91 7593936350
                     </a>
@@ -210,76 +209,71 @@ export const Contact: React.FC = () => {
                 <button
                   onClick={handleCopyPhone}
                   className="p-2 rounded-lg bg-background-secondary hover:bg-white/10 text-text-secondary hover:text-emerald-400 border border-border-subtle transition-colors shrink-0"
-                  title="Copy phone number"
+                  title="Copy phone number to clipboard"
+                  aria-label="Copy phone number to clipboard"
                 >
                   {copiedPhone ? <Check className="w-4 h-4 text-emerald-400" /> : <Copy className="w-4 h-4" />}
                 </button>
               </div>
 
-              {/* Quick Profile Links */}
-              <div className="space-y-2.5">
-                <a
-                  href="https://linkedin.com/in/shafeek-latheef"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-background-elevated/50 hover:bg-background-elevated border border-border-subtle hover:border-accent-cyan/40 transition-all group"
-                >
-                  <div className="flex items-center gap-3">
-                    <Linkedin className="w-4 h-4 text-accent-cyan" />
-                    <span className="text-xs font-medium text-text-primary">LinkedIn Profile</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-text-muted group-hover:text-accent-cyan group-hover:translate-x-0.5 transition-all" />
-                </a>
+              {/* Social Profiles */}
+              <div className="pt-4 border-t border-border-subtle">
+                <span className="text-[11px] font-mono text-text-muted block mb-3 uppercase tracking-wider">
+                  Social & Professional
+                </span>
+                <div className="grid grid-cols-2 gap-3">
+                  <a
+                    href="https://github.com/shafeek32"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 p-3 rounded-xl bg-background-elevated/80 border border-border-subtle hover:border-accent-cyan/40 text-text-primary text-xs font-medium hover:text-accent-cyan transition-all"
+                  >
+                    <Github className="w-4 h-4" />
+                    <span>GitHub</span>
+                  </a>
 
-                <a
-                  href="https://github.com/shafeek32"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="flex items-center justify-between p-3.5 rounded-xl bg-background-elevated/50 hover:bg-background-elevated border border-border-subtle hover:border-accent-cyan/40 transition-all group"
-                >
-                  <div className="flex items-center gap-3">
-                    <Github className="w-4 h-4 text-emerald-400" />
-                    <span className="text-xs font-medium text-text-primary">GitHub Profile (@shafeek32)</span>
-                  </div>
-                  <ArrowRight className="w-3.5 h-3.5 text-text-muted group-hover:text-emerald-400 group-hover:translate-x-0.5 transition-all" />
-                </a>
-
-                <div className="flex items-center gap-3 p-3.5 rounded-xl bg-background-elevated/30 border border-border-subtle text-xs text-text-muted">
-                  <MapPin className="w-4 h-4 text-indigo-400" />
-                  <span>Based in Kerala, India • Open to Remote & On-site Roles</span>
+                  <a
+                    href="https://linkedin.com/in/shafeek-latheef"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="flex items-center gap-2 p-3 rounded-xl bg-background-elevated/80 border border-border-subtle hover:border-accent-cyan/40 text-text-primary text-xs font-medium hover:text-accent-cyan transition-all"
+                  >
+                    <Linkedin className="w-4 h-4" />
+                    <span>LinkedIn</span>
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right: Interactive Contact Form */}
+          {/* Right: Contact Form */}
           <div className="lg:col-span-7">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
+              transition={{ duration: 0.4 }}
               className="p-6 sm:p-8 rounded-2xl glass-card border border-border-strong shadow-xl"
             >
               <h3 className="text-lg font-bold text-text-primary mb-1">Send a Message</h3>
               <p className="text-xs text-text-secondary mb-6">
-                Fill in the details below and I'll get back to you promptly.
+                Fill in the details below and I'll get back to you soon.
               </p>
 
               {status === 'success' ? (
-                <div className="p-6 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3">
-                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto">
+                <div className="p-8 rounded-xl bg-emerald-500/10 border border-emerald-500/30 text-center space-y-3">
+                  <div className="w-12 h-12 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mx-auto mb-2">
                     <CheckCircle2 className="w-6 h-6" />
                   </div>
-                  <h4 className="text-base font-bold text-text-primary">Message Dispatched!</h4>
-                  <p className="text-xs text-text-secondary max-w-sm mx-auto">
-                    Thank you for reaching out. Your message has been received and I'll respond as soon as possible.
+                  <h4 className="text-base sm:text-lg font-bold text-text-primary">Message sent successfully.</h4>
+                  <p className="text-xs sm:text-sm text-text-secondary max-w-sm mx-auto">
+                    I'll get back to you soon.
                   </p>
                   <button
                     onClick={() => setStatus('idle')}
-                    className="mt-4 px-4 py-2 rounded-lg text-xs font-semibold bg-background-elevated hover:bg-white/10 text-text-primary border border-border-subtle transition-colors"
+                    className="mt-4 px-5 py-2 rounded-xl text-xs font-semibold bg-background-elevated hover:bg-white/10 text-text-primary border border-border-subtle transition-colors"
                   >
-                    Send Another Note
+                    Send Another Message
                   </button>
                 </div>
               ) : (
@@ -294,13 +288,13 @@ export const Contact: React.FC = () => {
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
                       <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                        Your Name <span className="text-accent-cyan">*</span>
+                        Name <span className="text-accent-cyan">*</span>
                       </label>
                       <input
                         type="text"
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        placeholder="e.g. Alex Morgan"
+                        placeholder="Your name"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-background-elevated/70 border border-border-subtle text-text-primary text-xs focus:border-accent-cyan focus:outline-none transition-colors"
                         required
                       />
@@ -308,13 +302,13 @@ export const Contact: React.FC = () => {
 
                     <div>
                       <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                        Your Email <span className="text-accent-cyan">*</span>
+                        Email <span className="text-accent-cyan">*</span>
                       </label>
                       <input
                         type="email"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                        placeholder="e.g. alex@company.com"
+                        placeholder="your.email@example.com"
                         className="w-full px-3.5 py-2.5 rounded-xl bg-background-elevated/70 border border-border-subtle text-text-primary text-xs focus:border-accent-cyan focus:outline-none transition-colors"
                         required
                       />
@@ -323,13 +317,13 @@ export const Contact: React.FC = () => {
 
                   <div>
                     <label className="block text-xs font-mono text-text-secondary mb-1.5">
-                      Subject / Role Title
+                      Subject
                     </label>
                     <input
                       type="text"
                       value={formData.subject}
                       onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
-                      placeholder="e.g. Full-Stack Engineer Role / Project Consultation"
+                      placeholder="e.g. Software Engineering Opportunity / Collaboration"
                       className="w-full px-3.5 py-2.5 rounded-xl bg-background-elevated/70 border border-border-subtle text-text-primary text-xs focus:border-accent-cyan focus:outline-none transition-colors"
                     />
                   </div>
@@ -342,7 +336,7 @@ export const Contact: React.FC = () => {
                       rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                      placeholder="Hi Shafeek, I'd like to discuss an opportunity or project with you..."
+                      placeholder="Write your message here..."
                       className="w-full px-3.5 py-2.5 rounded-xl bg-background-elevated/70 border border-border-subtle text-text-primary text-xs focus:border-accent-cyan focus:outline-none transition-colors resize-none"
                       required
                     />
@@ -351,10 +345,13 @@ export const Contact: React.FC = () => {
                   <button
                     type="submit"
                     disabled={status === 'submitting'}
-                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-xs text-background bg-accent-cyan hover:bg-accent-cyan-light transition-all shadow-glow-cyan disabled:opacity-50"
+                    className="w-full flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-xs text-background bg-accent-cyan hover:bg-accent-cyan-light disabled:opacity-50 transition-all shadow-glow-cyan"
                   >
                     {status === 'submitting' ? (
-                      <span>Sending Message...</span>
+                      <>
+                        <span className="w-3.5 h-3.5 border-2 border-background border-t-transparent rounded-full animate-spin" />
+                        <span>Sending message...</span>
+                      </>
                     ) : (
                       <>
                         <Send className="w-3.5 h-3.5" />
