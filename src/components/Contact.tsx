@@ -70,6 +70,37 @@ export const Contact: React.FC = () => {
     setStatus('submitting');
 
     try {
+      const web3FormsKey = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY;
+
+      // 1. Send Email Notification directly to Gmail via Web3Forms (if configured)
+      if (web3FormsKey) {
+        try {
+          const res = await fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Accept: 'application/json'
+            },
+            body: JSON.stringify({
+              access_key: web3FormsKey,
+              name: formData.name.trim(),
+              email: formData.email.trim(),
+              subject: `Portfolio Contact: ${(formData.subject || '').trim() || 'New Message'} from ${formData.name.trim()}`,
+              message: formData.message.trim(),
+              from_name: `${formData.name.trim()} (Portfolio Visitor)`,
+              reply_to: formData.email.trim()
+            })
+          });
+          const data = await res.json();
+          if (!res.ok || !data.success) {
+            console.warn('Web3Forms dispatch response:', data);
+          }
+        } catch (mailErr) {
+          console.warn('Web3Forms email error:', mailErr);
+        }
+      }
+
+      // 2. Persist Message to Supabase Database (if configured)
       if (supabase) {
         const { error } = await supabase.from('messages').insert([
           {
@@ -80,10 +111,11 @@ export const Contact: React.FC = () => {
             created_at: new Date().toISOString()
           }
         ]);
-
         if (error) throw error;
-      } else {
-        // Fallback simulation when Supabase credentials are not set in .env
+      }
+
+      if (!web3FormsKey && !supabase) {
+        // Fallback simulation when no external services configured
         await new Promise((resolve) => setTimeout(resolve, 800));
       }
 
