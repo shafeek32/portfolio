@@ -41,7 +41,7 @@ export const projects: Project[] = [
     highlight: 'Weighted Sum Model (WSM) Analytics Engine',
     category: 'Full-Stack',
     technologies: ['React', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS', 'Recharts', 'REST APIs'],
-    githubUrl: 'https://github.com/shafeek32',
+    githubUrl: 'https://github.com/shafeek32/decision-companion-system',
     liveUrl: '',
     image: 'https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&w=1200&q=80',
     featured: true,
@@ -72,7 +72,7 @@ export const projects: Project[] = [
     highlight: 'AST-Driven Full-Stack Code Generation',
     category: 'Full-Stack',
     technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'REST APIs'],
-    githubUrl: 'https://github.com/shafeek32',
+    githubUrl: 'https://github.com/shafeek32/Webgenie',
     liveUrl: '',
     image: 'https://images.unsplash.com/photo-1507238691740-187a5b1d37b8?auto=format&fit=crop&w=1200&q=80',
     featured: true,
@@ -103,7 +103,7 @@ export const projects: Project[] = [
     highlight: 'In-Browser Sandbox & Evaluation Engine',
     category: 'Full-Stack',
     technologies: ['React', 'TypeScript', 'Node.js', 'Express', 'MongoDB', 'Tailwind CSS'],
-    githubUrl: 'https://github.com/shafeek32',
+    githubUrl: 'https://github.com/shafeek32/Coding-Platform',
     liveUrl: '',
     image: 'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=1200&q=80',
     featured: true,
@@ -125,37 +125,6 @@ export const projects: Project[] = [
       'Integrating deep developer tooling (Monaco Editor) into React apps.',
       'Designing relational schemas for tracking test cases, submissions, and leaderboard scores.',
       'REST API design for high-throughput submission polling.'
-    ]
-  },
-  {
-    id: 'signbridge-ai',
-    title: 'SignBridge AI',
-    shortDescription: 'Real-time computer vision and AI assistive platform that translates sign language gestures into text and speech for accessible communication.',
-    highlight: 'Real-Time Computer Vision & Landmark Tracking',
-    category: 'AI & ML',
-    technologies: ['Python', 'FastAPI', 'OpenCV', 'React', 'TypeScript', 'Tailwind CSS', 'AI'],
-    githubUrl: 'https://github.com/shafeek32',
-    liveUrl: '',
-    image: 'https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80',
-    featured: true,
-    overview: 'An AI-powered assistive communication platform that uses computer vision hand landmark tracking to interpret sign language gestures in real time, bridging the communication gap for deaf and hard-of-hearing individuals.',
-    problem: 'Individuals who rely on sign language face daily communication barriers in educational and public spaces where qualified human interpreters are unavailable.',
-    solution: 'Engineered a computer vision pipeline using Python and OpenCV that extracts hand keypoints from webcam video feeds and classifies sign language gestures, displaying instant text feedback in a modern React interface.',
-    keyFeatures: [
-      'Hand Landmark Tracking: Real-time 21-point hand skeleton tracking via webcam feed.',
-      'Instant Gesture Classification: Low-latency inference predicting sign characters and words.',
-      'Speech Synthesis: Converts translated text into audible spoken audio for two-way communication.',
-      'Accessible Interface: Clean high-contrast responsive interface optimized for desktop and mobile.'
-    ],
-    architecture: 'React + TypeScript frontend streaming camera input to a high-speed Python FastAPI backend executing computer vision landmark extraction and classification models with sub-second feedback.',
-    challenges: [
-      'Ensuring real-time frame processing speeds without UI stutter over camera streams.',
-      'Handling varying lighting conditions and hand orientations in real-world environments.'
-    ],
-    whatILearned: [
-      'Computer vision landmark processing techniques with OpenCV and MediaPipe.',
-      'Designing low-latency WebSocket / REST camera streaming pipelines.',
-      'Creating high-accessibility assistive user interfaces.'
     ]
   },
   {

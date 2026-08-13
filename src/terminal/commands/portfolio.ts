@@ -127,10 +127,9 @@ export const handleEducation = (): CommandOutput => {
       'Education:',
       '',
       'Degree:     B.Tech in Computer Science & Engineering',
-      'University: APJ Abdul Kalam Technological University',
-      'Period:     2020 - 2024',
-      'Location:   Kerala, India',
-      'Status:     Graduated'
+      'University: APJ Abdul Kalam Technological University (KTU)',
+      'Period:     2022 – 2026',
+      'Location:   Kerala, India'
     ]
   };
 };

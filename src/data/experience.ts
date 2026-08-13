@@ -34,15 +34,15 @@ export const experiences: Experience[] = [
   {
     id: 'exp-academic-dev',
     role: 'B.Tech in Computer Science & Engineering',
-    company: 'APJ Abdul Kalam Technological University',
+    company: 'APJ Abdul Kalam Technological University (KTU)',
     location: 'Kerala, India',
-    period: '2020 - 2024',
+    period: '2022 – 2026',
     type: 'Academic',
-    description: 'Graduated with strong foundations in Data Structures & Algorithms, Object-Oriented Design, Operating Systems, Computer Networks, Database Management Systems, and Cryptography.',
+    description: 'Undergraduate student building strong foundations in Data Structures & Algorithms, Object-Oriented Programming, Operating Systems, Computer Networks, Database Management Systems, and Cryptography.',
     achievements: [
-      'Led academic project teams in developing educational platforms and decentralized verification prototypes.',
-      'Organized technical workshops and competitive coding challenges for student developer communities.',
-      'Consistently delivered production-grade software engineering coursework and capstone projects.'
+      'Built software engineering course projects covering data structures, relational databases, and web platforms.',
+      'Active participant in student developer communities and technical workshops.',
+      'Delivered practical full-stack and algorithmic problem-solving capstone implementations.'
     ],
     technologies: ['C/C++', 'Java', 'Python', 'DBMS', 'Computer Networks', 'Operating Systems', 'Software Engineering']
   },
@@ -51,7 +51,7 @@ export const experiences: Experience[] = [
     role: 'Hackathons & Technical Innovation',
     company: 'Developer Hackathons & Competitions',
     location: 'India',
-    period: '2022 - 2024',
+    period: '2022 – Present',
     type: 'Hackathon',
     description: 'Collaborated in fast-paced 24-to-48-hour hackathons to rapid-prototype AI and web applications addressing accessibility, education, and automated workflow challenges.',
     achievements: [

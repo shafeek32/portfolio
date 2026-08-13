@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Linkedin, Mail, Phone, ArrowUp, Terminal } from 'lucide-react';
+import { WhatsAppIcon } from './WhatsAppIcon';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -44,6 +45,17 @@ export const Footer: React.FC = () => {
               className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
             >
               <Linkedin className="w-4 h-4" />
+            </a>
+
+            <a
+              href="https://wa.me/qr/Z73NBLC5WL7FO1"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Chat with me on WhatsApp"
+              className="p-2.5 rounded-xl text-text-secondary hover:text-emerald-400 bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-emerald-500/30 transition-all"
+              title="Chat with me on WhatsApp"
+            >
+              <WhatsAppIcon className="w-4 h-4" />
             </a>
 
             <a

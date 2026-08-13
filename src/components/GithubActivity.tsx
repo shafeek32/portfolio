@@ -19,23 +19,23 @@ export const GithubActivity: React.FC = () => {
       language: 'JavaScript / React',
       stars: 8,
       forks: 2,
-      url: 'https://github.com/shafeek32'
+      url: 'https://github.com/shafeek32/decision-companion-system'
     },
     {
-      name: 'webgenie',
+      name: 'Webgenie',
       desc: 'AST-driven visual no-code full-stack website and API code generator.',
       language: 'JavaScript / Node',
       stars: 15,
       forks: 3,
-      url: 'https://github.com/shafeek32'
+      url: 'https://github.com/shafeek32/Webgenie'
     },
     {
-      name: 'security-labs-playbook',
-      desc: 'Reconnaissance automation scripts, CTF write-ups, and web security vulnerability fixtures.',
-      language: 'Python / Bash',
-      stars: 10,
-      forks: 2,
-      url: 'https://github.com/shafeek32'
+      name: 'Coding-Platform',
+      desc: 'Competitive programming platform with integrated Monaco editor, test case runner, and leaderboards.',
+      language: 'TypeScript / Node',
+      stars: 14,
+      forks: 3,
+      url: 'https://github.com/shafeek32/Coding-Platform'
     }
   ];
 
