@@ -88,9 +88,10 @@ src/
 ## 📬 Contact & Connect
 
 - **Portfolio / GitHub:** [@shafeek32](https://github.com/shafeek32)
-- **LinkedIn:** [Shafeek Latheef](https://linkedin.com/in/shafeek-latheef)
+- **LinkedIn:** [Shafeek Latheef](https://www.linkedin.com/in/shafeek-latheef/)
+- **WhatsApp:** [Chat on WhatsApp](https://wa.me/qr/Z73NBLC5WL7FO1)
 - **Email:** [shafeekl2002@gmail.com](mailto:shafeekl2002@gmail.com)
-- **Phone:** +91 7593936350
+- **Phone:** [+91 7593936350](tel:+917593936350)
 
 ---
 

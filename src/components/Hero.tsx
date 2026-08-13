@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, FileText, Github, Sparkles, Code2, Cpu, Server } from 'lucide-react';
+import { ArrowDown, FileText, Github, Linkedin, Sparkles, Code2, Cpu, Server } from 'lucide-react';
 
 interface HeroProps {
   onResumeClick: () => void;
@@ -76,11 +76,11 @@ export const Hero: React.FC<HeroProps> = ({ onResumeClick }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.45 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto mb-8"
+          className="flex flex-wrap items-center justify-center gap-3.5 w-full sm:w-auto mb-8"
         >
           <a
             href="#projects"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-background bg-accent-cyan hover:bg-accent-cyan-light transition-all shadow-glow-cyan hover:-translate-y-0.5"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-background bg-accent-cyan hover:bg-accent-cyan-light transition-all shadow-glow-cyan hover:-translate-y-0.5"
           >
             <Code2 className="w-4 h-4" />
             <span>View Projects</span>
@@ -89,16 +89,32 @@ export const Hero: React.FC<HeroProps> = ({ onResumeClick }) => {
           <a
             href="https://github.com/shafeek32"
             target="_blank"
-            rel="noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-accent-cyan/40 transition-all hover:-translate-y-0.5"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-accent-cyan/40 transition-all hover:-translate-y-0.5"
+            aria-label="Shafeek Latheef on GitHub"
+            title="GitHub Profile"
           >
             <Github className="w-4 h-4 text-text-primary" />
-            <span>GitHub Profile</span>
+            <span>GitHub</span>
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/shafeek-latheef/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-[#0a66c2]/40 transition-all hover:-translate-y-0.5"
+            aria-label="Shafeek Latheef on LinkedIn"
+            title="LinkedIn Profile"
+          >
+            <Linkedin className="w-4 h-4 text-[#0a66c2]" />
+            <span>LinkedIn</span>
           </a>
 
           <button
             onClick={onResumeClick}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-emerald-500/40 transition-all hover:-translate-y-0.5"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-emerald-500/40 transition-all hover:-translate-y-0.5"
+            aria-label="View Shafeek Latheef Resume"
+            title="Interactive Resume"
           >
             <FileText className="w-4 h-4 text-emerald-400" />
             <span>Resume</span>

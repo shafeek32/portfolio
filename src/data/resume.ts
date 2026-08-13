@@ -33,6 +33,8 @@ export interface ResumeData {
     email: string;
     githubUrl: string;
     githubLabel: string;
+    linkedinUrl: string;
+    linkedinLabel: string;
     whatsappUrl: string;
     whatsappLabel: string;
     location: string;
@@ -51,6 +53,8 @@ export const resumeData: ResumeData = {
     email: 'shafeekl2002@gmail.com',
     githubUrl: 'https://github.com/shafeek32',
     githubLabel: 'GitHub',
+    linkedinUrl: 'https://www.linkedin.com/in/shafeek-latheef/',
+    linkedinLabel: 'LinkedIn',
     whatsappUrl: 'https://wa.me/qr/Z73NBLC5WL7FO1',
     whatsappLabel: 'Whatsapp',
     location: 'Alappuzha, India',

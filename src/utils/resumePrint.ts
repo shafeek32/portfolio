@@ -124,8 +124,9 @@ export function generateResumeHtml(): string {
     <div class="contacts">
       <span>📞 ${personalInfo.phone}</span>
       <span>✉️ <a href="mailto:${personalInfo.email}">${personalInfo.email}</a></span>
-      <span>💻 <a href="${personalInfo.githubUrl}">${personalInfo.githubLabel}</a></span>
-      <span>💬 <a href="${personalInfo.whatsappUrl}">${personalInfo.whatsappLabel}</a></span>
+      <span>💻 <a href="${personalInfo.githubUrl}" target="_blank" rel="noopener noreferrer">${personalInfo.githubLabel}</a></span>
+      ${personalInfo.linkedinUrl ? `<span>🔗 <a href="${personalInfo.linkedinUrl}" target="_blank" rel="noopener noreferrer">${personalInfo.linkedinLabel || 'LinkedIn'}</a></span>` : ''}
+      <span>💬 <a href="${personalInfo.whatsappUrl}" target="_blank" rel="noopener noreferrer">${personalInfo.whatsappLabel}</a></span>
       <span>📍 ${personalInfo.location}</span>
     </div>
   </div>

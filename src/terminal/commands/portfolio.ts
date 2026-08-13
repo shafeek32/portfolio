@@ -156,8 +156,8 @@ export const handleContact = (): CommandOutput => {
       '',
       'Email:    shafeekl2002@gmail.com',
       'Phone:    +91 7593936350',
-      'GitHub:   github.com/shafeek32',
-      'LinkedIn: linkedin.com/in/shafeek-latheef',
+      'GitHub:   https://github.com/shafeek32',
+      'LinkedIn: https://www.linkedin.com/in/shafeek-latheef/',
       '',
       'You can also use the contact form on this website.'
     ]
@@ -175,11 +175,11 @@ export const handleGithub = (): CommandOutput => {
 };
 
 export const handleLinkedin = (): CommandOutput => {
-  window.open('https://linkedin.com/in/shafeek-latheef', '_blank', 'noopener,noreferrer');
+  window.open('https://www.linkedin.com/in/shafeek-latheef/', '_blank', 'noopener,noreferrer');
   return {
     lines: [
       'Opening LinkedIn profile...',
-      'https://linkedin.com/in/shafeek-latheef'
+      'https://www.linkedin.com/in/shafeek-latheef/'
     ]
   };
 };

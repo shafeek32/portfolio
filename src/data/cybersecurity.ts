@@ -134,7 +134,7 @@ export const terminalPresetCommands: Record<string, string[]> = {
     'Email: shafeekl2002@gmail.com (or via contact form below)',
     'Phone: +91 7593936350',
     'GitHub: https://github.com/shafeek32',
-    'LinkedIn: https://linkedin.com/in/shafeek-latheef',
+    'LinkedIn: https://www.linkedin.com/in/shafeek-latheef/',
     'Location: Kerala, India'
   ]
 };

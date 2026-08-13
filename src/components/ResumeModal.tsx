@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Download, Printer, FileText, Mail, Phone, MapPin, Github, MessageSquare } from 'lucide-react';
+import { X, Download, Printer, FileText, Mail, Phone, MapPin, Github, Linkedin, MessageSquare } from 'lucide-react';
 import { resumeData } from '../data/resume';
 import { printResumeDocument } from '../utils/resumePrint';
 
@@ -164,6 +164,13 @@ export const ResumeModal: React.FC<ResumeModalProps> = ({ isOpen, onClose }) => 
                     <Github className="w-3 h-3 text-gray-700" />
                     <span>{personalInfo.githubLabel}</span>
                   </a>
+
+                  {personalInfo.linkedinUrl && (
+                    <a href={personalInfo.linkedinUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
+                      <Linkedin className="w-3 h-3 text-gray-700" />
+                      <span>{personalInfo.linkedinLabel || 'LinkedIn'}</span>
+                    </a>
+                  )}
 
                   <a href={personalInfo.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1 hover:text-blue-600 transition-colors">
                     <MessageSquare className="w-3 h-3 text-gray-700" />

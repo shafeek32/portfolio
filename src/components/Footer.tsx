@@ -30,19 +30,21 @@ export const Footer: React.FC = () => {
             <a
               href="https://github.com/shafeek32"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="GitHub Profile"
               className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
+              title="GitHub: shafeek32"
             >
               <Github className="w-4 h-4" />
             </a>
 
             <a
-              href="https://linkedin.com/in/shafeek-latheef"
+              href="https://www.linkedin.com/in/shafeek-latheef/"
               target="_blank"
-              rel="noreferrer"
+              rel="noopener noreferrer"
               aria-label="LinkedIn Profile"
               className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
+              title="LinkedIn: Shafeek Latheef"
             >
               <Linkedin className="w-4 h-4" />
             </a>

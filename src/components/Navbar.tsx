@@ -104,12 +104,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onResumeClick }) => {
           </a>
 
           <a
-            href="https://linkedin.com/in/shafeek-latheef"
+            href="https://www.linkedin.com/in/shafeek-latheef/"
             target="_blank"
-            rel="noreferrer"
+            rel="noopener noreferrer"
             aria-label="LinkedIn Profile"
             className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-white/5 border border-transparent hover:border-border-subtle transition-all"
-            title="LinkedIn Profile"
+            title="LinkedIn: Shafeek Latheef"
           >
             <Linkedin className="w-4 h-4" />
           </a>
@@ -182,10 +182,12 @@ export const Navbar: React.FC<NavbarProps> = ({ onResumeClick }) => {
                   <Github className="w-4 h-4" />
                 </a>
                 <a
-                  href="https://linkedin.com/in/shafeek-latheef"
+                  href="https://www.linkedin.com/in/shafeek-latheef/"
                   target="_blank"
-                  rel="noreferrer"
+                  rel="noopener noreferrer"
+                  aria-label="LinkedIn Profile"
                   className="p-2 text-text-secondary hover:text-text-primary bg-background-elevated rounded-lg border border-border-subtle"
+                  title="LinkedIn: Shafeek Latheef"
                 >
                   <Linkedin className="w-4 h-4" />
                 </a>

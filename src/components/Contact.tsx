@@ -290,18 +290,22 @@ export const Contact: React.FC = () => {
                   <a
                     href="https://github.com/shafeek32"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
+                    aria-label="GitHub Profile"
                     className="flex items-center gap-2 p-3 rounded-xl bg-background-elevated/80 border border-border-subtle hover:border-accent-cyan/40 text-text-primary text-xs font-medium hover:text-accent-cyan transition-all"
+                    title="GitHub: shafeek32"
                   >
                     <Github className="w-4 h-4" />
                     <span>GitHub</span>
                   </a>
 
                   <a
-                    href="https://linkedin.com/in/shafeek-latheef"
+                    href="https://www.linkedin.com/in/shafeek-latheef/"
                     target="_blank"
-                    rel="noreferrer"
+                    rel="noopener noreferrer"
+                    aria-label="LinkedIn Profile"
                     className="flex items-center gap-2 p-3 rounded-xl bg-background-elevated/80 border border-border-subtle hover:border-accent-cyan/40 text-text-primary text-xs font-medium hover:text-accent-cyan transition-all"
+                    title="LinkedIn: Shafeek Latheef"
                   >
                     <Linkedin className="w-4 h-4" />
                     <span>LinkedIn</span>
