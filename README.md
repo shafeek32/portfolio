@@ -18,13 +18,14 @@
 
 # 💻 SHAFEEK OS — Retro Developer Workstation
 
+[![Live Website](https://img.shields.io/badge/Live_Site-www.shafeektech.site-000080?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.shafeektech.site/)
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.7-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
 [![Vite](https://img.shields.io/badge/Vite-6.1-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-F59E0B?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-**[🌟 Explore Live System](https://github.com/shafeek32/portfolio)** • **[📄 Download Resume](https://github.com/shafeek32/portfolio/raw/main/public/Shafeek_Latheef_Resume.pdf)** • **[✉️ Get In Touch](mailto:shafeekl2002@gmail.com)**
+**[🌟 Explore Live System (shafeektech.site)](https://www.shafeektech.site/)** • **[📄 Download Resume](https://www.shafeektech.site/Shafeek_Latheef_Resume.pdf)** • **[✉️ Get In Touch](mailto:shafeekl2002@gmail.com)**
 
 ---
 
@@ -178,6 +179,7 @@ npm run build
 **Shafeek Latheef** — Software Engineer & Full-Stack Developer  
 *Kerala, India*
 
+[![Website](https://img.shields.io/badge/Website-www.shafeektech.site-000080?style=for-the-badge&logo=googlechrome&logoColor=white)](https://www.shafeektech.site/)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/shafeek-latheef/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/shafeek32)
 [![Email](https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white)](mailto:shafeekl2002@gmail.com)
