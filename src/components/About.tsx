@@ -1,178 +1,119 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Briefcase, Target, Sparkles, User, Code, Cpu, Server, Shield } from 'lucide-react';
+import { FileText, GraduationCap, Code2, Sparkles, MapPin } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (
-    <section id="about" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="about" className="py-8 px-3 sm:px-6 lg:px-12 relative z-10 font-mono">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-mono mb-3">
-            <User className="w-3.5 h-3.5" />
-            <span>01 // ABOUT ME</span>
-          </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">
-            Engineering with <span className="text-gradient-cyan">Purpose</span>
-          </h2>
-          <p className="text-sm text-text-muted mt-2 max-w-lg">
-            Building reliable, accessible software with attention to performance and clean architecture.
-          </p>
-        </div>
-
-        {/* 2-Column Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
-          {/* Left Column: Concise Narrative */}
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-7 flex flex-col justify-between p-6 sm:p-8 rounded-2xl glass-card border border-border-subtle shadow-lg space-y-6"
-          >
-            <div className="space-y-4 text-text-secondary text-sm sm:text-base leading-relaxed">
-              <p>
-                I am a <span className="text-text-primary font-semibold">Computer Science graduate</span> from <span className="text-accent-cyan font-medium">APJ Abdul Kalam Technological University</span> with a strong passion for building software that solves practical problems.
-              </p>
-
-              <p>
-                My focus centers on <span className="text-text-primary font-medium">full-stack web applications</span>, <span className="text-text-primary font-medium">AI-powered systems</span>, and <span className="text-text-primary font-medium">scalable backend architectures</span>. I enjoy transforming complex requirements into responsive, maintainable products.
-              </p>
-
-              <p>
-                Whether designing stateful AI agent workflows, optimizing REST APIs, or writing clean React components, I value readable code, robust database modeling, and intuitive user experiences.
-              </p>
-            </div>
-
-            {/* Core Competencies Matrix */}
-            <div className="pt-5 border-t border-border-subtle grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <div className="flex items-start gap-2.5">
-                <div className="p-1 rounded-md bg-accent-cyan/10 text-accent-cyan mt-0.5">
-                  <Code className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-semibold text-text-primary">Full-Stack Web Apps</h4>
-                  <p className="text-[11px] text-text-muted">React, TypeScript, Tailwind, Node.js & FastAPI.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <div className="p-1 rounded-md bg-emerald-500/10 text-emerald-400 mt-0.5">
-                  <Cpu className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-semibold text-text-primary">AI & Agentic Systems</h4>
-                  <p className="text-[11px] text-text-muted">LangGraph, LLMs, OCR & computer vision.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <div className="p-1 rounded-md bg-indigo-500/10 text-indigo-400 mt-0.5">
-                  <Server className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-semibold text-text-primary">Scalable Backends</h4>
-                  <p className="text-[11px] text-text-muted">Fast REST APIs, PostgreSQL & MongoDB.</p>
-                </div>
-              </div>
-
-              <div className="flex items-start gap-2.5">
-                <div className="p-1 rounded-md bg-rose-500/10 text-rose-400 mt-0.5">
-                  <Shield className="w-3.5 h-3.5" />
-                </div>
-                <div>
-                  <h4 className="text-xs font-semibold text-text-primary">Security & Linux Basics</h4>
-                  <p className="text-[11px] text-text-muted">Secure coding & OWASP vulnerability awareness.</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Column: Developer Snapshot Card */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 0.5 }}
-            className="lg:col-span-5 flex flex-col justify-between p-6 sm:p-7 rounded-2xl bg-gradient-to-b from-background-tertiary to-background-secondary border border-border-strong shadow-xl relative overflow-hidden group"
-          >
-            {/* Top decorative gradient glow */}
-            <div className="absolute -top-12 -right-12 w-36 h-36 bg-accent-cyan/15 rounded-full blur-2xl group-hover:bg-accent-cyan/25 transition-all duration-500" />
-
-            <div>
-              <div className="flex items-center justify-between pb-4 border-b border-border-subtle mb-5">
-                <div className="flex items-center gap-3">
-                  <div className="relative">
-                    <div className="w-11 h-11 rounded-xl bg-background-elevated border border-border-strong flex items-center justify-center text-accent-cyan font-bold text-base font-mono">
-                      SL
-                    </div>
-                    <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-emerald-500 border-2 border-background-secondary" />
-                  </div>
-                  <div>
-                    <h3 className="font-bold text-text-primary text-base">Shafeek Latheef</h3>
-                    <p className="text-xs text-accent-cyan font-mono">@shafeek32</p>
-                  </div>
-                </div>
-
-                <div className="px-2.5 py-0.5 rounded-md bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 text-[11px] font-semibold">
-                  Active
-                </div>
-              </div>
-
-              {/* Profile Details List */}
-              <div className="space-y-3 text-xs">
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-background-elevated/60 border border-border-subtle">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <MapPin className="w-3.5 h-3.5 text-accent-cyan" />
-                    <span>Location</span>
-                  </div>
-                  <span className="font-semibold text-text-primary">Kerala, India</span>
-                </div>
-
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-background-elevated/60 border border-border-subtle">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <Briefcase className="w-3.5 h-3.5 text-emerald-400" />
-                    <span>Role</span>
-                  </div>
-                  <span className="font-semibold text-text-primary">Software Engineer</span>
-                </div>
-
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-background-elevated/60 border border-border-subtle">
-                  <div className="flex items-center gap-2 text-text-muted">
-                    <Target className="w-3.5 h-3.5 text-indigo-400" />
-                    <span>Focus</span>
-                  </div>
-                  <span className="font-semibold text-text-primary">Full-Stack & AI Systems</span>
-                </div>
-
-                <div className="flex items-center justify-between p-2.5 rounded-lg bg-emerald-500/5 border border-emerald-500/20">
-                  <div className="flex items-center gap-2 text-emerald-400">
-                    <Sparkles className="w-3.5 h-3.5" />
-                    <span className="font-medium">Status</span>
-                  </div>
-                  <span className="font-semibold text-emerald-400">Open to opportunities</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Quick Tech Snapshot Tags */}
-            <div className="mt-6 pt-4 border-t border-border-subtle">
-              <span className="text-[11px] font-mono text-text-muted block mb-2 uppercase tracking-wider">
-                Core Stack
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.4 }}
+          className="retro-window-frame overflow-hidden shadow-2xl"
+        >
+          {/* Notepad Titlebar */}
+          <div className="retro-titlebar">
+            <div className="flex items-center gap-2 truncate">
+              <FileText className="w-4 h-4 text-white inline shrink-0" />
+              <span className="text-xs sm:text-sm font-bold tracking-wide truncate">
+                About_Shafeek.txt — Notepad [WordWrap: ON]
               </span>
-              <div className="flex flex-wrap gap-1.5">
-                {['React', 'TypeScript', 'FastAPI', 'Python', 'Node.js', 'PostgreSQL', 'LangGraph', 'Docker'].map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-2 py-0.5 rounded text-[11px] bg-background-elevated border border-border-subtle text-text-secondary font-mono"
-                  >
-                    {tech}
-                  </span>
-                ))}
+            </div>
+            <div className="flex items-center gap-1 shrink-0">
+              <button className="retro-titlebar-btn">_</button>
+              <button className="retro-titlebar-btn">□</button>
+              <button className="retro-titlebar-btn">✕</button>
+            </div>
+          </div>
+
+          {/* Notepad Menu Bar */}
+          <div className="px-3 py-1 bg-[#C0C0C0] border-b border-[#808080] flex items-center justify-between text-xs text-black select-none border-t border-white">
+            <div className="flex items-center gap-3">
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>E</u>dit</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer">F<u>o</u>rmat</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>iew</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+            </div>
+            <div className="text-[11px] text-gray-700 hidden sm:block">
+              Encoding: UTF-8 • Lines: 42
+            </div>
+          </div>
+
+          {/* Notepad Body Canvas */}
+          <div className="p-4 sm:p-7 bg-[#C0C0C0] space-y-4">
+            {/* White Document Paper Inset */}
+            <div className="retro-inset p-5 sm:p-8 bg-white text-black space-y-4 font-mono">
+              <div className="text-xs font-bold text-[#000080] pb-2 border-b border-gray-200 uppercase flex items-center justify-between">
+                <span>[DOCUMENT: SHAFEEK_PROFILE_STATEMENT]</span>
+                <span className="text-gray-500 text-[10px]">READ-ONLY</span>
+              </div>
+
+              <div className="space-y-3 text-xs sm:text-sm text-[#111111] leading-relaxed font-sans">
+                <p>
+                  Hello, I'm <strong className="font-bold text-black font-mono">Shafeek Latheef</strong>, a software engineer with a strong focus on building resilient full-stack web applications, automated agentic pipelines, and scalable backend infrastructure.
+                </p>
+
+                <p>
+                  I enjoy solving practical engineering challenges across the entire product lifecycle—from architecting clean frontend state machines in <strong className="font-mono text-black font-semibold">React & TypeScript</strong> to implementing performant backend APIs in <strong className="font-mono text-black font-semibold">FastAPI, Node.js, and PostgreSQL</strong>.
+                </p>
+
+                <p>
+                  Currently pursuing my <strong className="font-bold text-black">B.Tech in Computer Science and Engineering (2022–2026)</strong> at APJ Abdul Kalam Technological University, I continuously explore developer ergonomics, AST-driven tooling, and multi-agent workflow systems.
+                </p>
+              </div>
+
+              {/* 4 Metadata Cards Inset */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-3 border-t border-gray-200">
+                <div className="p-3 bg-[#F5F5F5] border border-[#D0D0D0] flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[#000080] font-bold text-xs mb-1">
+                    <GraduationCap className="w-3.5 h-3.5" />
+                    <span>EDUCATION</span>
+                  </div>
+                  <div className="text-xs font-bold text-black">B.Tech CSE (2022-26)</div>
+                  <div className="text-[11px] text-gray-600 font-sans mt-0.5">APJ Abdul Kalam Tech Univ</div>
+                </div>
+
+                <div className="p-3 bg-[#F5F5F5] border border-[#D0D0D0] flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[#000080] font-bold text-xs mb-1">
+                    <Code2 className="w-3.5 h-3.5" />
+                    <span>DISCIPLINE</span>
+                  </div>
+                  <div className="text-xs font-bold text-black">Full-Stack Engineering</div>
+                  <div className="text-[11px] text-gray-600 font-sans mt-0.5">Modern Web Applications</div>
+                </div>
+
+                <div className="p-3 bg-[#F5F5F5] border border-[#D0D0D0] flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[#000080] font-bold text-xs mb-1">
+                    <Sparkles className="w-3.5 h-3.5" />
+                    <span>INTELLIGENCE</span>
+                  </div>
+                  <div className="text-xs font-bold text-black">AI & Agent Systems</div>
+                  <div className="text-[11px] text-gray-600 font-sans mt-0.5">LangGraph & Workflows</div>
+                </div>
+
+                <div className="p-3 bg-[#F5F5F5] border border-[#D0D0D0] flex flex-col justify-between">
+                  <div className="flex items-center gap-1.5 text-[#000080] font-bold text-xs mb-1">
+                    <MapPin className="w-3.5 h-3.5" />
+                    <span>LOCATION</span>
+                  </div>
+                  <div className="text-xs font-bold text-black">Kerala, India</div>
+                  <div className="text-[11px] text-gray-600 font-sans mt-0.5">Open to Global Remote</div>
+                </div>
               </div>
             </div>
-          </motion.div>
-        </div>
+          </div>
+
+          {/* Notepad Status Bar */}
+          <div className="retro-statusbar border-t border-[#808080] bg-[#C0C0C0] px-3 py-1">
+            <span>Ln 1, Col 1</span>
+            <span>100%</span>
+            <span>Windows (CRLF)</span>
+            <span>UTF-8</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

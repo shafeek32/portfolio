@@ -17,19 +17,19 @@ export const experiences: Experience[] = [
     technologies: ['React', 'TypeScript', 'FastAPI', 'Python', 'Node.js', 'PostgreSQL', 'MongoDB', 'Docker', 'Git']
   },
   {
-    id: 'exp-cyber-internship',
-    role: 'Cybersecurity Self-Learner (Foundations & Labs)',
-    company: 'TryHackMe & Virtual Security Labs',
+    id: 'exp-systems-foundations',
+    role: 'Software Engineering & Systems Foundations',
+    company: 'Open Source & Self-Directed Engineering',
     location: 'Kerala, India',
     period: '2024 - Present',
     type: 'Self-Learning',
-    description: 'Active beginner learner building foundational knowledge in web security concepts, Linux command line essentials, networking fundamentals, and secure coding practices.',
+    description: 'Deepening core software engineering competencies across backend architecture, API design patterns, database performance tuning, and Linux environment administration.',
     achievements: [
-      'Completed beginner rooms on TryHackMe covering Linux fundamentals, basic networking, and web security overviews.',
-      'Studied foundational concepts of OWASP Top 10 vulnerabilities including SQL Injection and Cross-Site Scripting (XSS).',
-      'Practiced basic Linux shell navigation, file permissions, and essential network troubleshooting tools.'
+      'Engineered asynchronous RESTful APIs with FastAPI and Express featuring comprehensive input validation.',
+      'Studied database optimization techniques including multi-column indexing and relational query design.',
+      'Utilized Linux shell utilities and Docker containers for local microservice orchestration.'
     ],
-    technologies: ['Linux', 'Bash', 'Networking Basics', 'Wireshark', 'Nmap Basics', 'OWASP Top 10', 'TryHackMe']
+    technologies: ['Linux', 'Bash', 'Docker', 'REST APIs', 'PostgreSQL', 'MongoDB', 'System Design']
   },
   {
     id: 'exp-academic-dev',

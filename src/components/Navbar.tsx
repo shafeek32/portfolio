@@ -1,212 +1,274 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Github, Linkedin, FileText, Menu, X, Terminal, ArrowUpRight } from 'lucide-react';
+import { FileText, Folder, User, Terminal, Mail, Clock, ChevronRight, Settings, RotateCcw, HelpCircle } from 'lucide-react';
 
 interface NavbarProps {
   onResumeClick: () => void;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({ onResumeClick }) => {
-  const [scrolled, setScrolled] = useState(false);
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [activeSection, setActiveSection] = useState('home');
-
-  const navLinks = [
-    { name: 'Home', href: '#home' },
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Projects', href: '#projects' },
-    { name: 'Experience', href: '#experience' },
-    { name: 'Certifications', href: '#certifications' },
-    { name: 'Cybersecurity', href: '#cybersecurity' },
-    { name: 'Contact', href: '#contact' },
-  ];
+  const [startOpen, setStartOpen] = useState(false);
+  const [activeMenu, setActiveMenu] = useState<string | null>(null);
+  const [currentTime, setCurrentTime] = useState('');
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
+    const updateTime = () => {
+      const now = new Date();
+      setCurrentTime(
+        now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' })
+      );
+    };
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    return () => clearInterval(timer);
+  }, []);
 
-      // Simple active section detection
-      const sections = navLinks.map(l => l.href.substring(1));
-      const scrollPosition = window.scrollY + 200;
-
-      for (let i = sections.length - 1; i >= 0; i--) {
-        const el = document.getElementById(sections[i]);
-        if (el && el.offsetTop <= scrollPosition) {
-          setActiveSection(sections[i]);
-          break;
-        }
+  // Close menus when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('#top-system-menu')) {
+        setStartOpen(false);
+        setActiveMenu(null);
       }
     };
-
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener('click', handleClickOutside);
+    return () => window.removeEventListener('click', handleClickOutside);
   }, []);
+
+  const navLinks = [
+    { name: 'About_Me.txt', target: 'about', icon: <User className="w-3.5 h-3.5" /> },
+    { name: 'Projects_Explorer.exe', target: 'projects', icon: <Folder className="w-3.5 h-3.5" /> },
+    { name: 'System_Properties.sys', target: 'skills', icon: <Settings className="w-3.5 h-3.5" /> },
+    { name: 'Journey_Event_Log.log', target: 'experience', icon: <Clock className="w-3.5 h-3.5" /> },
+    { name: 'Command_Prompt.com', target: 'terminal', icon: <Terminal className="w-3.5 h-3.5" /> },
+    { name: 'Contact_Dialog.exe', target: 'contact', icon: <Mail className="w-3.5 h-3.5" /> },
+  ];
+
+  const handleNavClick = (targetId: string) => {
+    setStartOpen(false);
+    setActiveMenu(null);
+    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled
-          ? 'bg-background/85 backdrop-blur-xl border-b border-border-subtle shadow-lg py-3.5'
-          : 'bg-transparent py-5'
-      }`}
+      id="top-system-menu"
+      className="fixed top-0 left-0 right-0 z-50 bg-[#C0C0C0] border-b-2 border-[#404040] shadow-[0_2px_0px_#000000] select-none font-mono text-xs"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
-        {/* Brand Logo */}
-        <a
-          href="#home"
-          className="group flex items-center gap-2.5 text-text-primary hover:text-accent-cyan transition-colors"
-        >
-          <div className="w-8 h-8 rounded-lg bg-background-elevated border border-border-strong flex items-center justify-center text-accent-cyan group-hover:border-accent-cyan/50 group-hover:shadow-glow-cyan transition-all">
-            <Terminal className="w-4 h-4" />
-          </div>
-          <div className="flex flex-col">
-            <span className="font-bold tracking-tight text-base group-hover:text-gradient-cyan transition-colors">
-              Shafeek Latheef
-            </span>
-            <span className="text-[10px] text-text-muted font-mono tracking-wide">
-              SOFTWARE ENGINEER
-            </span>
-          </div>
-        </a>
+      <div className="max-w-7xl mx-auto px-2 py-1 flex items-center justify-between gap-2">
+        {/* Left: Start Button & Top Menus */}
+        <div className="flex items-center gap-2">
+          {/* Start Button */}
+          <div className="relative">
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setStartOpen(!startOpen);
+                setActiveMenu(null);
+              }}
+              className={`flex items-center gap-1.5 px-3 py-1 font-bold text-xs font-mono uppercase transition-all ${
+                startOpen
+                  ? 'bg-[#A0A0A0] border-t-2 border-l-2 border-[#404040] border-b-2 border-r-2 border-white shadow-none'
+                  : 'retro-btn'
+              }`}
+            >
+              <span className="text-base leading-none">💾</span>
+              <span className="tracking-wider">Start</span>
+            </button>
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center gap-1 bg-background-secondary/60 backdrop-blur-md px-3 py-1.5 rounded-full border border-border-subtle shadow-inner">
-          {navLinks.map((link) => {
-            const isActive = activeSection === link.href.substring(1);
-            return (
-              <a
-                key={link.name}
-                href={link.href}
-                className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all ${
-                  isActive
-                    ? 'text-accent-cyan bg-accent-cyan/10 font-semibold border border-accent-cyan/20'
-                    : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
+            {/* Start Menu Dropdown */}
+            <AnimatePresence>
+              {startOpen && (
+                <motion.div
+                  initial={{ opacity: 0, y: -4 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -4 }}
+                  transition={{ duration: 0.15 }}
+                  className="absolute top-full left-0 mt-1 w-64 retro-window-frame z-50 overflow-hidden shadow-2xl"
+                >
+                  <div className="flex">
+                    {/* Windows 95 style side strip */}
+                    <div className="w-7 bg-gradient-to-t from-[#000080] to-[#1084D0] flex items-end justify-center py-4 text-white font-bold text-sm tracking-widest uppercase [writing-mode:vertical-rl] rotate-180 select-none">
+                      SHAFEEK OS '26
+                    </div>
+
+                    <div className="flex-1 p-1 bg-[#C0C0C0] space-y-0.5">
+                      {navLinks.map((item) => (
+                        <button
+                          key={item.name}
+                          onClick={() => handleNavClick(item.target)}
+                          className="w-full flex items-center justify-between px-3 py-1.5 hover:bg-[#000080] hover:text-white transition-colors group cursor-pointer text-left text-xs"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="text-[#000080] group-hover:text-white">{item.icon}</span>
+                            <span className="font-bold">{item.name}</span>
+                          </div>
+                          <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-white" />
+                        </button>
+                      ))}
+
+                      <div className="h-px bg-[#808080] my-1 border-b border-white" />
+
+                      <button
+                        onClick={() => {
+                          setStartOpen(false);
+                          onResumeClick();
+                        }}
+                        className="w-full flex items-center justify-between px-3 py-1.5 hover:bg-[#000080] hover:text-white transition-colors group text-left text-xs font-bold"
+                      >
+                        <div className="flex items-center gap-2">
+                          <FileText className="w-3.5 h-3.5 text-[#000080] group-hover:text-white" />
+                          <span>Shafeek_Resume.pdf</span>
+                        </div>
+                        <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-white" />
+                      </button>
+
+                      <div className="h-px bg-[#808080] my-1 border-b border-white" />
+
+                      <button
+                        onClick={() => {
+                          setStartOpen(false);
+                          window.location.reload();
+                        }}
+                        className="w-full flex items-center justify-between px-3 py-1.5 hover:bg-[#000080] hover:text-white transition-colors group text-left text-xs text-gray-700 hover:text-white"
+                      >
+                        <div className="flex items-center gap-2">
+                          <RotateCcw className="w-3.5 h-3.5" />
+                          <span>Restart Workstation</span>
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+
+          {/* Top Menu Bar Items: File, Projects, Terminal, Help */}
+          <div className="hidden sm:flex items-center gap-1 text-black font-mono">
+            <div className="relative">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveMenu(activeMenu === 'file' ? null : 'file');
+                  setStartOpen(false);
+                }}
+                className={`px-2 py-0.5 hover:bg-[#000080] hover:text-white cursor-pointer ${
+                  activeMenu === 'file' ? 'bg-[#000080] text-white' : ''
                 }`}
               >
-                {link.name}
-              </a>
-            );
-          })}
-        </nav>
-
-        {/* Action Buttons (GitHub, LinkedIn, Resume) */}
-        <div className="hidden sm:flex items-center gap-2.5">
-          <a
-            href="https://github.com/shafeek32"
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub Profile"
-            className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-white/5 border border-transparent hover:border-border-subtle transition-all"
-            title="GitHub: shafeek32"
-          >
-            <Github className="w-4 h-4" />
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/shafeek-latheef/"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
-            className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-white/5 border border-transparent hover:border-border-subtle transition-all"
-            title="LinkedIn: Shafeek Latheef"
-          >
-            <Linkedin className="w-4 h-4" />
-          </a>
-
-          <button
-            onClick={onResumeClick}
-            className="group relative flex items-center gap-1.5 px-3.5 py-1.5 text-xs font-semibold text-text-primary bg-background-elevated hover:bg-accent-cyan/10 border border-border-strong hover:border-accent-cyan/40 rounded-lg transition-all shadow-sm"
-          >
-            <FileText className="w-3.5 h-3.5 text-accent-cyan group-hover:scale-110 transition-transform" />
-            <span>Resume</span>
-            <ArrowUpRight className="w-3 h-3 text-text-muted group-hover:text-accent-cyan transition-colors" />
-          </button>
-        </div>
-
-        {/* Mobile Menu Button */}
-        <div className="flex sm:hidden items-center gap-2">
-          <button
-            onClick={onResumeClick}
-            className="p-2 text-xs font-semibold text-accent-cyan bg-accent-cyan/10 border border-accent-cyan/20 rounded-lg"
-            title="Resume"
-          >
-            <FileText className="w-4 h-4" />
-          </button>
-
-          <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 rounded-lg text-text-secondary hover:text-text-primary hover:bg-white/5 border border-border-subtle"
-            aria-label="Toggle navigation menu"
-          >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Drawer Menu */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.25 }}
-            className="lg:hidden bg-background-secondary/95 backdrop-blur-2xl border-b border-border-strong px-5 py-6 space-y-4 shadow-2xl overflow-hidden"
-          >
-            <div className="flex flex-col space-y-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setMobileMenuOpen(false)}
-                  className={`px-3 py-2 rounded-lg text-sm font-medium transition-colors ${
-                    activeSection === link.href.substring(1)
-                      ? 'bg-accent-cyan/10 text-accent-cyan font-semibold border border-accent-cyan/20'
-                      : 'text-text-secondary hover:text-text-primary hover:bg-white/5'
-                  }`}
-                >
-                  {link.name}
-                </a>
-              ))}
+                <u>F</u>ile
+              </button>
+              {activeMenu === 'file' && (
+                <div className="absolute top-full left-0 mt-1 w-48 retro-window-frame p-1 bg-[#C0C0C0] z-50 shadow-lg space-y-0.5">
+                  <button
+                    onClick={() => handleNavClick('home')}
+                    className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white block"
+                  >
+                    Desktop Home
+                  </button>
+                  <button
+                    onClick={() => {
+                      setActiveMenu(null);
+                      onResumeClick();
+                    }}
+                    className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white block"
+                  >
+                    View Official Resume
+                  </button>
+                  <button
+                    onClick={() => handleNavClick('contact')}
+                    className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white block"
+                  >
+                    Transmit Message
+                  </button>
+                </div>
+              )}
             </div>
 
-            <div className="pt-4 border-t border-border-subtle flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <a
-                  href="https://github.com/shafeek32"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="p-2 text-text-secondary hover:text-text-primary bg-background-elevated rounded-lg border border-border-subtle"
-                >
-                  <Github className="w-4 h-4" />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/shafeek-latheef/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn Profile"
-                  className="p-2 text-text-secondary hover:text-text-primary bg-background-elevated rounded-lg border border-border-subtle"
-                  title="LinkedIn: Shafeek Latheef"
-                >
-                  <Linkedin className="w-4 h-4" />
-                </a>
-              </div>
-
+            <div className="relative">
               <button
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onResumeClick();
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveMenu(activeMenu === 'projects' ? null : 'projects');
+                  setStartOpen(false);
                 }}
-                className="flex items-center gap-2 px-4 py-2 text-xs font-semibold text-background bg-accent-cyan hover:bg-accent-cyan-light rounded-lg shadow-glow-cyan"
+                className={`px-2 py-0.5 hover:bg-[#000080] hover:text-white cursor-pointer ${
+                  activeMenu === 'projects' ? 'bg-[#000080] text-white' : ''
+                }`}
               >
-                <FileText className="w-3.5 h-3.5" />
-                <span>View Full Resume</span>
+                <u>P</u>rojects
+              </button>
+              {activeMenu === 'projects' && (
+                <div className="absolute top-full left-0 mt-1 w-52 retro-window-frame p-1 bg-[#C0C0C0] z-50 shadow-lg space-y-0.5">
+                  <button
+                    onClick={() => handleNavClick('projects')}
+                    className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white block font-bold"
+                  >
+                    Open Project Explorer
+                  </button>
+                  <a
+                    href="https://github.com/shafeek32"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="w-full text-left px-2 py-1 hover:bg-[#000080] hover:text-white block"
+                  >
+                    GitHub Repositories →
+                  </a>
+                </div>
+              )}
+            </div>
+
+            <div className="relative">
+              <button
+                onClick={() => handleNavClick('terminal')}
+                className="px-2 py-0.5 hover:bg-[#000080] hover:text-white cursor-pointer"
+              >
+                <u>T</u>erminal
               </button>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+
+            <div className="relative">
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setActiveMenu(activeMenu === 'help' ? null : 'help');
+                  setStartOpen(false);
+                }}
+                className={`px-2 py-0.5 hover:bg-[#000080] hover:text-white cursor-pointer ${
+                  activeMenu === 'help' ? 'bg-[#000080] text-white' : ''
+                }`}
+              >
+                <u>H</u>elp
+              </button>
+              {activeMenu === 'help' && (
+                <div className="absolute top-full left-0 mt-1 w-64 retro-window-frame p-3 bg-[#FFFFFA] z-50 shadow-lg text-xs space-y-2 text-black">
+                  <div className="font-bold text-[#000080] flex items-center gap-1.5 pb-1 border-b border-gray-300">
+                    <HelpCircle className="w-3.5 h-3.5" />
+                    <span>ShafeekOS Workstation v3.0</span>
+                  </div>
+                  <p className="text-[11px] text-gray-700 leading-relaxed font-sans">
+                    Retro Personal Workstation built with React 18, TypeScript & Vite.
+                  </p>
+                  <div className="text-[10px] text-gray-500 font-mono pt-1 border-t border-gray-200">
+                    STATUS: ALL SYSTEMS OPERATIONAL
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Right: Live Local System Time */}
+        <div className="flex items-center gap-2 shrink-0">
+          <div className="retro-inset px-2.5 py-0.5 flex items-center gap-1.5 font-mono text-[11px] bg-[#C0C0C0] text-black">
+            <Clock className="w-3 h-3 text-[#000080]" />
+            <span className="font-bold tracking-tight">{currentTime || '12:00:00 AM'}</span>
+          </div>
+        </div>
+      </div>
     </header>
   );
 };
+

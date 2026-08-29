@@ -5,7 +5,7 @@ export interface Project {
   highlight: string;
   badge?: string;
   role?: string;
-  category: 'AI & ML' | 'Full-Stack' | 'Systems & Security' | 'All';
+  category: 'AI & ML' | 'Full-Stack' | 'Systems & Architecture' | 'All';
   technologies: string[];
   githubUrl?: string;
   liveUrl?: string;
@@ -57,15 +57,6 @@ export interface Certification {
   credentialUrl?: string;
   skills: string[];
   description: string;
-}
-
-export interface CybersecurityTopic {
-  step: string;
-  title: string;
-  description: string;
-  skills: string[];
-  status: 'Foundations' | 'Learning' | 'Exploring' | 'Practicing';
-  tools: string[];
 }
 
 export interface ContactFormData {

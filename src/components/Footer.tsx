@@ -1,6 +1,5 @@
 import React from 'react';
-import { Github, Linkedin, Mail, Phone, ArrowUp, Terminal } from 'lucide-react';
-import { WhatsAppIcon } from './WhatsAppIcon';
+import { ArrowUp } from 'lucide-react';
 
 export const Footer: React.FC = () => {
   const scrollToTop = () => {
@@ -8,96 +7,72 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="relative z-10 border-t border-border-subtle bg-background-secondary/80 backdrop-blur-md pt-12 pb-8 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-6xl mx-auto flex flex-col items-center justify-between gap-8">
-        
-        {/* Top Tier: Identity & Navigation */}
-        <div className="w-full flex flex-col md:flex-row items-center justify-between gap-6 pb-8 border-b border-border-subtle">
-          <div className="flex flex-col items-center md:items-start text-center md:text-left">
-            <div className="flex items-center gap-2 mb-1.5">
-              <div className="w-6 h-6 rounded-md bg-accent-cyan/10 border border-accent-cyan/30 flex items-center justify-center text-accent-cyan">
-                <Terminal className="w-3.5 h-3.5" />
-              </div>
-              <span className="font-bold text-text-primary text-base">Shafeek Latheef</span>
-            </div>
-            <p className="text-xs text-text-muted">
-              Software Engineer • Full-Stack Developer • Cybersecurity Enthusiast
+    <footer className="relative z-10 border-t-2 border-[#404040] bg-[#C0C0C0] pb-16 pt-6 px-4 sm:px-8 font-mono text-xs text-black select-none shadow-[inset_0_2px_0px_#FFFFFF]">
+      <div className="max-w-6xl mx-auto space-y-4">
+        {/* Top: Identity + Links + Back to Top */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-4 pb-4 border-b border-[#808080]">
+          <div>
+            <span className="text-sm font-bold uppercase block text-black">
+              SHAFEEK LATHEEF // PERSONAL WORKSTATION
+            </span>
+            <p className="text-xs text-gray-700 mt-0.5">
+              Software Engineer • Full-Stack Developer • Kerala, India
             </p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center gap-3">
+          {/* Links */}
+          <div className="flex flex-wrap items-center gap-2">
             <a
               href="https://github.com/shafeek32"
               target="_blank"
-              rel="noopener noreferrer"
-              aria-label="GitHub Profile"
-              className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
-              title="GitHub: shafeek32"
+              rel="noreferrer"
+              className="retro-btn px-2.5 py-1 text-xs font-bold"
             >
-              <Github className="w-4 h-4" />
+              GitHub
             </a>
-
             <a
               href="https://www.linkedin.com/in/shafeek-latheef/"
               target="_blank"
-              rel="noopener noreferrer"
-              aria-label="LinkedIn Profile"
-              className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
-              title="LinkedIn: Shafeek Latheef"
+              rel="noreferrer"
+              className="retro-btn px-2.5 py-1 text-xs font-bold"
             >
-              <Linkedin className="w-4 h-4" />
+              LinkedIn
             </a>
-
-            <a
-              href="https://wa.me/qr/Z73NBLC5WL7FO1"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Chat with me on WhatsApp"
-              className="p-2.5 rounded-xl text-text-secondary hover:text-emerald-400 bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-emerald-500/30 transition-all"
-              title="Chat with me on WhatsApp"
-            >
-              <WhatsAppIcon className="w-4 h-4" />
-            </a>
-
             <a
               href="mailto:shafeekl2002@gmail.com"
-              aria-label="Email Address"
-              className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all"
-              title="Email: shafeekl2002@gmail.com"
+              className="retro-btn px-2.5 py-1 text-xs font-bold"
             >
-              <Mail className="w-4 h-4" />
+              Email
             </a>
-
-            <a
-              href="tel:+917593936350"
-              aria-label="Phone Number"
-              className="p-2.5 rounded-xl text-text-secondary hover:text-emerald-400 bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-emerald-500/30 transition-all"
-              title="Call: +91 7593936350"
-            >
-              <Phone className="w-4 h-4" />
-            </a>
-
             <button
               onClick={scrollToTop}
-              className="p-2.5 rounded-xl text-text-secondary hover:text-accent-cyan bg-background-elevated hover:bg-white/5 border border-border-subtle hover:border-accent-cyan/30 transition-all ml-2"
-              aria-label="Scroll back to top"
-              title="Back to Top"
+              className="retro-btn px-2.5 py-1 text-xs font-bold flex items-center gap-1 bg-[#D4D0C8]"
             >
-              <ArrowUp className="w-4 h-4" />
+              <span>TOP</span>
+              <ArrowUp className="w-3 h-3 text-[#000080]" />
             </button>
           </div>
         </div>
 
-        {/* Bottom Tier: Copyright & Credits */}
-        <div className="w-full flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-text-muted">
-          <p className="font-mono">
-            © 2026 Shafeek Latheef. All rights reserved.
-          </p>
+        {/* Bottom: Authentic Retro Badges (No fake visitor counters) */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left text-[11px]">
+          {/* Status Tags */}
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-2 font-bold">
+            <span className="px-2 py-0.5 bg-[#FFFFCC] border border-[#808080] text-black">
+              ⚡ REACT 18 + TS
+            </span>
+            <span className="px-2 py-0.5 bg-[#E0E8FF] border border-[#808080] text-[#000080]">
+              SYSTEM READY
+            </span>
+            <span className="px-2 py-0.5 bg-[#E8E8E8] border border-[#808080] text-black">
+              HTML 5.0 W3C VALID
+            </span>
+          </div>
 
-          <p className="flex items-center gap-1 font-mono text-[11px]">
-            Designed & engineered with React, TypeScript & Tailwind CSS.
-          </p>
+          {/* Copyright */}
+          <div className="text-gray-700 font-bold">
+            © 2026 Shafeek Latheef. All rights reserved.
+          </div>
         </div>
       </div>
     </footer>

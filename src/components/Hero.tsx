@@ -1,182 +1,191 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowDown, FileText, Github, Linkedin, Sparkles, Code2, Cpu, Server } from 'lucide-react';
+import { FileText, ArrowDown, Folder, Terminal, Compass, Layers, Server, Cpu, Database, Sparkles, Monitor } from 'lucide-react';
 
 interface HeroProps {
   onResumeClick: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({ onResumeClick }) => {
+  const architectureNodes = [
+    { label: '01. Frontend UI', sub: 'React / TypeScript', icon: <Layers className="w-4 h-4 text-[#000080]" /> },
+    { label: '02. API Gateway', sub: 'REST / FastAPI', icon: <Server className="w-4 h-4 text-[#000080]" /> },
+    { label: '03. Backend Logic', sub: 'Node.js / Python', icon: <Cpu className="w-4 h-4 text-[#000080]" /> },
+    { label: '04. Relational DB', sub: 'PostgreSQL / Supabase', icon: <Database className="w-4 h-4 text-[#000080]" /> },
+    { label: '05. AI Agent Core', sub: 'LangGraph Workflows', icon: <Sparkles className="w-4 h-4 text-[#000080]" /> },
+  ];
+
   return (
-    <section id="home" className="relative min-h-screen flex items-center justify-center pt-28 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      <div className="max-w-6xl mx-auto w-full flex flex-col items-center text-center relative z-10">
-        
-        {/* Availability Badge */}
+    <section id="home" className="pt-4 pb-8 px-3 sm:px-6 lg:px-12 relative z-10 font-mono">
+      <div className="max-w-6xl mx-auto">
+        {/* Main Workstation Window */}
         <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          animate={{ opacity: 1, y: 0 }}
+          initial={{ opacity: 0, scale: 0.98, y: 15 }}
+          animate={{ opacity: 1, scale: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-400 text-xs font-medium mb-5 backdrop-blur-md shadow-sm"
+          className="retro-window-frame overflow-hidden shadow-2xl"
         >
-          <span className="relative flex h-2 w-2">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-          </span>
-          <span>Open to Software Engineering Opportunities</span>
-        </motion.div>
-
-        {/* Developer Qualification Tag */}
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4, delay: 0.1 }}
-          className="inline-flex items-center gap-2 px-4 py-1 rounded-full bg-background-elevated/80 border border-border-strong text-text-secondary text-xs font-mono mb-4"
-        >
-          <Sparkles className="w-3.5 h-3.5 text-accent-cyan" />
-          <span>Computer Science Graduate</span>
-        </motion.div>
-
-        {/* Prominent Name & Title */}
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.15 }}
-          className="mb-3"
-        >
-          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-text-primary">
-            Shafeek Latheef
-          </h1>
-          <p className="text-base sm:text-xl font-mono text-accent-cyan mt-2 font-medium tracking-wide">
-            Software Engineer · Full-Stack Developer
-          </p>
-        </motion.div>
-
-        {/* Value Proposition Headline */}
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.25 }}
-          className="text-2xl sm:text-4xl md:text-5xl font-bold tracking-tight text-text-primary max-w-4xl leading-[1.15] mb-5"
-        >
-          Building software that <span className="text-gradient-cyan">solves real problems.</span>
-        </motion.h2>
-
-        {/* Focused Professional Description */}
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.35 }}
-          className="text-sm sm:text-lg text-text-secondary max-w-2xl leading-relaxed mb-8"
-        >
-          Specializing in <span className="text-text-primary font-medium">full-stack development</span>, <span className="text-text-primary font-medium">AI-powered applications</span>, and <span className="text-text-primary font-medium">scalable backend architectures</span> with a strong foundation in problem solving and clean code.
-        </motion.p>
-
-        {/* Primary CTAs */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.45 }}
-          className="flex flex-wrap items-center justify-center gap-3.5 w-full sm:w-auto mb-8"
-        >
-          <a
-            href="#projects"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-background bg-accent-cyan hover:bg-accent-cyan-light transition-all shadow-glow-cyan hover:-translate-y-0.5"
-          >
-            <Code2 className="w-4 h-4" />
-            <span>View Projects</span>
-          </a>
-
-          <a
-            href="https://github.com/shafeek32"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-accent-cyan/40 transition-all hover:-translate-y-0.5"
-            aria-label="Shafeek Latheef on GitHub"
-            title="GitHub Profile"
-          >
-            <Github className="w-4 h-4 text-text-primary" />
-            <span>GitHub</span>
-          </a>
-
-          <a
-            href="https://www.linkedin.com/in/shafeek-latheef/"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-[#0a66c2]/40 transition-all hover:-translate-y-0.5"
-            aria-label="Shafeek Latheef on LinkedIn"
-            title="LinkedIn Profile"
-          >
-            <Linkedin className="w-4 h-4 text-[#0a66c2]" />
-            <span>LinkedIn</span>
-          </a>
-
-          <button
-            onClick={onResumeClick}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-xl font-semibold text-sm text-text-primary bg-background-elevated hover:bg-white/10 border border-border-strong hover:border-emerald-500/40 transition-all hover:-translate-y-0.5"
-            aria-label="View Shafeek Latheef Resume"
-            title="Interactive Resume"
-          >
-            <FileText className="w-4 h-4 text-emerald-400" />
-            <span>Resume</span>
-          </button>
-        </motion.div>
-
-        {/* Technical Highlights Grid */}
-        <motion.div
-          initial={{ opacity: 0, y: 25 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.55 }}
-          className="w-full grid grid-cols-1 md:grid-cols-3 gap-4 text-left mt-2"
-        >
-          <div className="p-4 rounded-xl glass-card border border-border-subtle hover:border-accent-cyan/30 transition-all group">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-accent-cyan/10 flex items-center justify-center text-accent-cyan group-hover:scale-110 transition-transform">
-                <Code2 className="w-4 h-4" />
-              </div>
-              <h3 className="text-sm font-semibold text-text-primary">Full-Stack Development</h3>
+          {/* Titlebar */}
+          <div className="retro-titlebar">
+            <div className="flex items-center gap-2 truncate">
+              <Monitor className="w-4 h-4 text-white inline shrink-0" />
+              <span className="text-xs sm:text-sm font-bold tracking-wide truncate">
+                💻 Shafeek_OS.exe — [Personal Workstation System]
+              </span>
             </div>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Responsive React/TypeScript frontends integrated with fast REST APIs and clean component architectures.
-            </p>
+            <div className="flex items-center gap-1 shrink-0">
+              <button className="retro-titlebar-btn" title="Minimize">_</button>
+              <button className="retro-titlebar-btn" title="Maximize">□</button>
+              <button className="retro-titlebar-btn bg-[#C0C0C0] text-red-700 font-bold" title="Close">✕</button>
+            </div>
           </div>
 
-          <div className="p-4 rounded-xl glass-card border border-border-subtle hover:border-emerald-500/30 transition-all group">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 group-hover:scale-110 transition-transform">
-                <Cpu className="w-4 h-4" />
-              </div>
-              <h3 className="text-sm font-semibold text-text-primary">AI-Powered Applications</h3>
-            </div>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              LangGraph agent workflows, OCR document ingestion, structured LLM extraction, and computer vision.
-            </p>
+          {/* Window Menu Bar */}
+          <div className="px-3 py-1 bg-[#C0C0C0] border-b border-[#808080] flex items-center gap-4 text-xs text-black select-none border-t border-white">
+            <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>F</u>ile</span>
+            <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>E</u>dit</span>
+            <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>iew</span>
+            <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
           </div>
 
-          <div className="p-4 rounded-xl glass-card border border-border-subtle hover:border-indigo-500/30 transition-all group">
-            <div className="flex items-center gap-3 mb-2">
-              <div className="w-8 h-8 rounded-lg bg-indigo-500/10 flex items-center justify-center text-indigo-400 group-hover:scale-110 transition-transform">
-                <Server className="w-4 h-4" />
+          {/* Window Body Container */}
+          <div className="p-4 sm:p-7 bg-[#C0C0C0] space-y-5">
+            {/* Top Row: Hero Introduction + System Information Panel */}
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-stretch">
+              {/* Left Main Hero Inset Box */}
+              <div className="lg:col-span-8 retro-inset p-5 sm:p-7 flex flex-col justify-between space-y-5 bg-[#FFFFFA]">
+                <div>
+                  <div className="flex items-center gap-2 mb-3">
+                    <span className="px-2 py-0.5 bg-[#000080] text-white text-[11px] font-bold uppercase tracking-wider">
+                      ★ STATUS: AVAILABLE FOR 2026 ROLES
+                    </span>
+                  </div>
+
+                  <h1 className="text-3xl sm:text-5xl font-mono font-bold tracking-tight text-black leading-tight mb-2">
+                    SHAFEEK LATHEEF
+                  </h1>
+
+                  <div className="text-sm sm:text-base font-bold text-[#000080] uppercase tracking-wide mb-3">
+                    SOFTWARE ENGINEER • FULL-STACK DEVELOPER
+                  </div>
+
+                  <p className="text-xs sm:text-sm text-[#222222] font-mono leading-relaxed max-w-2xl">
+                    I design and engineer reliable full-stack applications, intelligent AI agent pipelines, and robust backend systems. Welcome to my personal software engineering workstation.
+                  </p>
+                </div>
+
+                {/* 3D Bevel Action Buttons */}
+                <div className="flex flex-wrap items-center gap-3 pt-2">
+                  <a
+                    href="#projects"
+                    className="retro-btn px-4 py-2.5 text-xs font-bold uppercase flex items-center gap-2 bg-[#D4D0C8] hover:bg-[#E0E0E0] text-black shadow-sm"
+                  >
+                    <Folder className="w-3.5 h-3.5 text-[#000080]" />
+                    <span>View Projects (4)</span>
+                    <ArrowDown className="w-3 h-3" />
+                  </a>
+
+                  <button
+                    onClick={onResumeClick}
+                    className="retro-btn px-4 py-2.5 text-xs font-bold uppercase flex items-center gap-2 bg-[#FFFFE0] hover:bg-white text-black shadow-sm"
+                  >
+                    <FileText className="w-3.5 h-3.5 text-[#000080]" />
+                    <span>Resume.pdf</span>
+                  </button>
+
+                  <a
+                    href="#contact"
+                    className="retro-btn px-4 py-2.5 text-xs font-bold uppercase flex items-center gap-2 bg-[#D4D0C8] hover:bg-[#E0E0E0] text-black shadow-sm"
+                  >
+                    <Terminal className="w-3.5 h-3.5 text-[#000080]" />
+                    <span>Contact Dialog</span>
+                  </a>
+                </div>
               </div>
-              <h3 className="text-sm font-semibold text-text-primary">Backend & Systems</h3>
+
+              {/* Right Side: System Information Panel */}
+              <div className="lg:col-span-4 retro-inset p-5 flex flex-col justify-between space-y-4 bg-[#F5F5F0]">
+                <div className="pb-2 border-b-2 border-[#C0C0C0] flex items-center justify-between font-bold text-xs text-black">
+                  <div className="flex items-center gap-1.5 text-[#000080]">
+                    <Terminal className="w-3.5 h-3.5" />
+                    <span>SYSTEM INFORMATION</span>
+                  </div>
+                  <span className="text-[10px] text-gray-500">SYS_V3.0</span>
+                </div>
+
+                <div className="space-y-2.5 text-xs leading-relaxed">
+                  <div className="flex justify-between border-b border-gray-200 pb-1">
+                    <span className="text-gray-600 font-bold">DEVELOPER:</span>
+                    <span className="text-black font-bold">Shafeek Latheef</span>
+                  </div>
+                  <div className="flex justify-between border-b border-gray-200 pb-1">
+                    <span className="text-gray-600 font-bold">ROLE:</span>
+                    <span className="text-black font-bold">Software Engineer</span>
+                  </div>
+                  <div className="flex justify-between border-b border-gray-200 pb-1">
+                    <span className="text-gray-600 font-bold">FOCUS:</span>
+                    <span className="text-black font-bold">Full-Stack & AI Systems</span>
+                  </div>
+                  <div className="flex justify-between border-b border-gray-200 pb-1">
+                    <span className="text-gray-600 font-bold">STACK:</span>
+                    <span className="text-[#000080] font-bold">React • Node • FastAPI</span>
+                  </div>
+                  <div className="flex justify-between border-b border-gray-200 pb-1">
+                    <span className="text-gray-600 font-bold">LOCATION:</span>
+                    <span className="text-black font-bold flex items-center gap-1">
+                      <Compass className="w-3 h-3 text-[#000080]" />
+                      Kerala, India
+                    </span>
+                  </div>
+                  <div className="flex justify-between pb-1">
+                    <span className="text-gray-600 font-bold">STATUS:</span>
+                    <span className="text-emerald-700 font-bold">● ONLINE / READY</span>
+                  </div>
+                </div>
+
+                <div className="p-2 bg-[#E0E0E0] border border-[#808080] text-center text-[10px] text-[#404040] font-bold uppercase tracking-wider">
+                  DESIGN ⚙ ENGINEER ⚙ DEPLOY
+                </div>
+              </div>
             </div>
-            <p className="text-xs text-text-secondary leading-relaxed">
-              Scalable services using Python FastAPI & Node.js, PostgreSQL/MongoDB schemas, and secure API design.
-            </p>
+
+            {/* Architecture Pipeline Inset Box */}
+            <div className="retro-inset p-4 bg-[#FFFFFA]">
+              <div className="flex items-center justify-between mb-3 pb-2 border-b border-[#C0C0C0] text-xs font-bold text-black">
+                <span className="text-[#000080] uppercase tracking-wider flex items-center gap-1.5">
+                  <span>⚙</span> SYSTEM ARCHITECTURE PIPELINE
+                </span>
+                <span className="text-[10px] text-gray-500 hidden sm:inline">END-TO-END FLOW</span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-2.5">
+                {architectureNodes.map((node, idx) => (
+                  <div
+                    key={node.label}
+                    className="p-3 bg-[#F0F0F0] border-t border-l border-white border-b-2 border-r-2 border-[#808080] shadow-sm flex flex-col justify-between"
+                  >
+                    <div className="flex items-center justify-between mb-1">
+                      {node.icon}
+                      <span className="text-[10px] font-bold text-[#808080]">0{idx + 1}</span>
+                    </div>
+                    <div>
+                      <div className="text-xs font-bold text-black">{node.label}</div>
+                      <div className="text-[11px] text-gray-600 font-sans mt-0.5">{node.sub}</div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Window Status Bar */}
+          <div className="retro-statusbar border-t border-[#808080] bg-[#C0C0C0] px-3 py-1">
+            <span>Ready</span>
+            <span>100%</span>
+            <span>UTF-8</span>
+            <span>Memory: 64MB OK</span>
           </div>
         </motion.div>
-
-        {/* Scroll Indicator */}
-        <motion.a
-          href="#about"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8, duration: 0.4 }}
-          className="mt-10 p-2 rounded-full text-text-muted hover:text-accent-cyan hover:bg-white/5 transition-all animate-bounce"
-          aria-label="Scroll down to About section"
-        >
-          <ArrowDown className="w-4 h-4" />
-        </motion.a>
-
       </div>
     </section>
   );

@@ -165,7 +165,7 @@ export const projects: Project[] = [
     title: 'Decentralized E-Voting System',
     shortDescription: 'Blockchain-based electronic voting prototype utilizing smart contracts and public-key cryptography for transparent and tamper-resistant election audits.',
     highlight: 'Cryptographic Integrity & Public Verifiability',
-    category: 'Systems & Security',
+    category: 'Systems & Architecture',
     technologies: ['Solidity', 'Web3.js', 'React', 'JavaScript', 'Cryptography'],
     githubUrl: 'https://github.com/shafeek32',
     liveUrl: '',

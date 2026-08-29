@@ -4,127 +4,202 @@
 
 @layer base {
   :root {
-    --color-bg-primary: #090d16;
-    --color-bg-secondary: #0e1524;
-    --color-bg-tertiary: #141d30;
-    --color-accent-cyan: #06b6d4;
-    --color-accent-emerald: #10b981;
-    --color-accent-indigo: #6366f1;
+    --color-desktop: #1a153a;
+    --color-surface: #C0C0C0;
+    --color-navy: #000080;
+    --color-titlebar-start: #000080;
+    --color-titlebar-end: #1084D0;
   }
 
-  html {
-    color-scheme: dark;
-    scroll-behavior: smooth;
+  html, body, #root {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+    background-color: #120e2e;
+    color: #000000;
+    font-family: 'Plus Jakarta Sans', 'MS Sans Serif', 'Arial', sans-serif;
   }
 
-  body {
-    background-color: var(--color-bg-primary);
-    color: #f8fafc;
-    overflow-x: hidden;
-  }
-
-  /* Custom scrollbar */
+  /* Retro OS Scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 14px;
+    height: 14px;
   }
 
   ::-webkit-scrollbar-track {
-    background: #090d16;
+    background: #DFDFDF;
+    background-image: repeating-linear-gradient(45deg, #DFDFDF 0, #DFDFDF 2px, #E8E8E8 2px, #E8E8E8 4px);
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #1e293b;
-    border-radius: 4px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
+    background: #C0C0C0;
+    border-top: 2px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: inset 1px 1px 0px #DFDFDF, inset -1px -1px 0px #808080;
   }
 
-  ::-webkit-scrollbar-thumb:hover {
-    background: #334155;
+  ::-webkit-scrollbar-thumb:active {
+    border-top: 2px solid #404040;
+    border-left: 2px solid #404040;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
   }
 
-  /* Focus visible styles for accessibility */
+  /* Focus accessibility */
   *:focus-visible {
-    outline: 2px solid #06b6d4;
-    outline-offset: 2px;
+    outline: 2px dotted #000080;
+    outline-offset: 1px;
+  }
+
+  ::selection {
+    background-color: #000080;
+    color: #FFFFFF;
   }
 }
 
 @layer utilities {
-  /* Ambient glowing backdrop */
-  .bg-radial-gradient {
-    background-image: radial-gradient(
-      circle at 50% 0%,
-      rgba(6, 182, 212, 0.12) 0%,
-      rgba(16, 185, 129, 0.05) 35%,
-      transparent 70%
-    );
+  /* Classic 90s OS 3D Bevel Utilities */
+  .retro-window-frame {
+    background-color: #C0C0C0;
+    border-top: 2px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    border-right: 2px solid #333333;
+    border-bottom: 2px solid #333333;
+    box-shadow: 3px 3px 0px rgba(0, 0, 0, 0.45), inset 1px 1px 0px #DFDFDF, inset -1px -1px 0px #808080;
   }
 
-  .bg-grid-pattern {
-    background-size: 32px 32px;
-    background-image: 
-      linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
-      linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  .retro-window-frame-active {
+    box-shadow: 4px 4px 0px rgba(0, 0, 0, 0.6), inset 1px 1px 0px #DFDFDF, inset -1px -1px 0px #808080;
   }
 
-  .bg-dots-pattern {
-    background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-    background-size: 24px 24px;
+  .retro-titlebar {
+    background: linear-gradient(90deg, #0a1172 0%, #1560bd 50%, #2080df 100%);
+    color: #FFFFFF;
+    font-weight: 700;
+    padding: 3px 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-family: 'Space Mono', 'MS Sans Serif', monospace;
+    letter-spacing: 0.5px;
+    user-select: none;
   }
 
-  /* Glassmorphism cards */
-  .glass-card {
-    background: rgba(14, 21, 36, 0.65);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.07);
+  .retro-titlebar-inactive {
+    background: linear-gradient(90deg, #707888 0%, #88909c 100%);
+    color: #DFDFDF;
   }
 
-  .glass-card-hover {
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  .retro-titlebar-btn {
+    width: 16px;
+    height: 14px;
+    background-color: #C0C0C0;
+    border-top: 1px solid #FFFFFF;
+    border-left: 1px solid #FFFFFF;
+    border-right: 1px solid #404040;
+    border-bottom: 1px solid #404040;
+    box-shadow: inset 1px 1px 0px #DFDFDF, inset -1px -1px 0px #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 900;
+    color: #000000;
+    line-height: 1;
+    cursor: pointer;
+    user-select: none;
   }
 
-  .glass-card-hover:hover {
-    background: rgba(20, 29, 48, 0.85);
-    border-color: rgba(6, 182, 212, 0.3);
-    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(6, 182, 212, 0.15);
-    transform: translateY(-3px);
+  .retro-titlebar-btn:active {
+    border-top: 1px solid #404040;
+    border-left: 1px solid #404040;
+    border-right: 1px solid #FFFFFF;
+    border-bottom: 1px solid #FFFFFF;
+    box-shadow: none;
+    padding-top: 1px;
+    padding-left: 1px;
   }
 
-  .glass-card-emerald-hover:hover {
-    background: rgba(20, 29, 48, 0.85);
-    border-color: rgba(16, 185, 129, 0.3);
-    box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.5), 0 0 20px -5px rgba(16, 185, 129, 0.15);
-    transform: translateY(-3px);
+  .retro-btn {
+    background-color: #C0C0C0;
+    color: #000000;
+    border-top: 2px solid #FFFFFF;
+    border-left: 2px solid #FFFFFF;
+    border-right: 2px solid #404040;
+    border-bottom: 2px solid #404040;
+    box-shadow: inset 1px 1px 0px #DFDFDF, inset -1px -1px 0px #808080;
+    font-family: 'Space Mono', 'MS Sans Serif', monospace;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.05s ease;
   }
 
-  /* Glow accents */
-  .glow-cyan-sm {
-    box-shadow: 0 0 15px -3px rgba(6, 182, 212, 0.35);
+  .retro-btn:active, .retro-btn-pressed {
+    border-top: 2px solid #404040 !important;
+    border-left: 2px solid #404040 !important;
+    border-right: 2px solid #FFFFFF !important;
+    border-bottom: 2px solid #FFFFFF !important;
+    background-color: #b5b5b5 !important;
+    box-shadow: inset 1px 1px 0px #606060 !important;
+    transform: translate(1px, 1px);
   }
 
-  .glow-emerald-sm {
-    box-shadow: 0 0 15px -3px rgba(16, 185, 129, 0.35);
+  .retro-btn-pressed {
+    background-color: #b0b0b0 !important;
   }
 
-  /* Gradient texts */
-  .text-gradient-cyan {
-    background: linear-gradient(135deg, #ffffff 0%, #22d3ee 50%, #06b6d4 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .retro-inset {
+    background-color: #FFFFFF;
+    border-top: 2px solid #808080;
+    border-left: 2px solid #808080;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    box-shadow: inset 1px 1px 0px #404040, inset -1px -1px 0px #DFDFDF;
   }
 
-  .text-gradient-emerald {
-    background: linear-gradient(135deg, #ffffff 0%, #34d399 50%, #10b981 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .retro-inset-cream {
+    background-color: #F6F1EA;
+    border-top: 2px solid #8a847e;
+    border-left: 2px solid #8a847e;
+    border-right: 2px solid #FFFFFF;
+    border-bottom: 2px solid #FFFFFF;
+    box-shadow: inset 1px 1px 0px #504c48, inset -1px -1px 0px #DFDFDF;
   }
 
-  .text-gradient-cyber {
-    background: linear-gradient(135deg, #22d3ee 0%, #34d399 50%, #818cf8 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+  .retro-statusbar {
+    background-color: #C0C0C0;
+    border-top: 1px solid #808080;
+    padding: 3px 8px;
+    font-family: 'Space Mono', monospace;
+    font-size: 11px;
+    color: #333333;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    user-select: none;
+  }
+
+  .pixel-art-rendering {
+    image-rendering: pixelated;
+    image-rendering: crisp-edges;
+  }
+
+  /* Optional Scanline CRT overlay (disabled by default) */
+  .crt-scanlines::after {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.08) 50%);
+    z-index: 9999;
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.3;
   }
 }
 
@@ -161,12 +236,10 @@
     print-color-adjust: exact !important;
   }
 
-  /* Hide entire website structure, background canvases, navbar, footer, and modal chrome */
   body > * {
     display: none !important;
   }
 
-  /* Specifically isolate and render the printable resume */
   #resume-modal-portal,
   #resume-modal-portal * {
     display: block !important;

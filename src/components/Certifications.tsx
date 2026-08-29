@@ -1,96 +1,97 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { certifications } from '../data/certifications';
-import { Award, ExternalLink, ShieldCheck } from 'lucide-react';
+import { Award } from 'lucide-react';
 
 export const Certifications: React.FC = () => {
   return (
-    <section id="certifications" className="py-24 px-4 sm:px-6 lg:px-8 relative z-10">
+    <section id="certifications" className="py-12 px-3 sm:px-6 lg:px-12 relative z-10">
       <div className="max-w-6xl mx-auto">
-        {/* Section Header */}
-        <div className="flex flex-col items-center text-center mb-16">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-accent-cyan/10 border border-accent-cyan/20 text-accent-cyan text-xs font-mono mb-3">
-            <Award className="w-3.5 h-3.5" />
-            <span>05 // CREDENTIALS & SPECIALIZATIONS</span>
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-60px' }}
+          transition={{ duration: 0.4 }}
+          className="retro-window-frame overflow-hidden font-mono"
+        >
+          {/* Titlebar */}
+          <div className="retro-titlebar">
+            <div className="flex items-center gap-2">
+              <Award className="w-4 h-4 text-white inline" />
+              <span className="text-xs sm:text-sm font-bold tracking-wide">
+                06_Credentials_Viewer.cert — [Certificates & Verified Accreditations]
+              </span>
+            </div>
+            <div className="flex items-center gap-1">
+              <button className="retro-titlebar-btn">_</button>
+              <button className="retro-titlebar-btn">□</button>
+              <button className="retro-titlebar-btn">✕</button>
+            </div>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-text-primary tracking-tight">
-            Verified <span className="text-gradient-cyan">Certifications</span>
-          </h2>
-          <p className="text-sm text-text-muted mt-2 max-w-lg">
-            Structured continuing education and intensive technical bootcamps.
-          </p>
-        </div>
 
-        {/* Certifications Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
-          {certifications.map((cert, index) => (
-            <motion.div
-              key={cert.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="p-6 sm:p-7 rounded-2xl glass-card glass-card-hover border border-border-subtle flex flex-col justify-between group"
-            >
-              <div>
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className="flex items-center gap-3">
-                    <div className="w-12 h-12 rounded-xl bg-accent-cyan/10 border border-accent-cyan/25 flex items-center justify-center text-accent-cyan group-hover:scale-105 transition-transform">
-                      <Award className="w-6 h-6" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-mono text-accent-cyan block font-semibold">
-                        {cert.issuer}
+          {/* Menu */}
+          <div className="px-3 py-1 bg-[#C0C0C0] border-b border-[#808080] flex items-center justify-between text-xs text-black select-none border-t border-white">
+            <div className="flex items-center gap-3">
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>C</u>ertificates</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>V</u>erify</span>
+              <span className="hover:bg-[#000080] hover:text-white px-1 cursor-pointer"><u>H</u>elp</span>
+            </div>
+            <div className="text-[11px] text-gray-700">
+              TRUSTED ROOT CERTIFICATES: VALID
+            </div>
+          </div>
+
+          {/* Body */}
+          <div className="p-4 sm:p-8 bg-[#C0C0C0] space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              {certifications.map((cert, index) => (
+                <motion.div
+                  key={cert.id}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                  className="retro-inset p-5 bg-[#FFFFFA] flex flex-col justify-between space-y-4 hover:border-[#000080] transition-colors"
+                >
+                  <div>
+                    <div className="flex items-center justify-between gap-2 text-xs text-black font-bold pb-2 border-b border-gray-200 mb-3">
+                      <span className="text-[#000080] bg-[#E0E8FF] px-2 py-0.5 border border-[#80A0FF]">
+                        [{cert.issuer}]
                       </span>
-                      <h3 className="font-bold text-text-primary text-base group-hover:text-accent-cyan transition-colors line-clamp-1">
-                        {cert.title}
-                      </h3>
+                      <span className="text-gray-600">{cert.issueDate}</span>
                     </div>
+
+                    <h3 className="text-base font-bold text-black mb-2 leading-snug font-mono">
+                      {cert.title}
+                    </h3>
+
+                    <p className="text-xs text-[#333333] font-sans leading-relaxed">
+                      {cert.description}
+                    </p>
                   </div>
 
-                  <span className="px-2 py-0.5 rounded text-[10px] font-mono bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 shrink-0">
-                    {cert.issueDate}
-                  </span>
-                </div>
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-gray-100">
+                    {cert.skills.map((skill) => (
+                      <span
+                        key={skill}
+                        className="px-2 py-0.5 text-[10px] font-mono font-bold bg-[#EAEAEA] border border-[#B0B0B0] text-black"
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
 
-                <p className="text-xs text-text-secondary leading-relaxed mb-4">
-                  {cert.description}
-                </p>
-
-                {/* Skills verified */}
-                <div className="flex flex-wrap gap-1.5 pt-2 mb-4">
-                  {cert.skills.map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-2 py-0.5 rounded text-[11px] font-mono bg-background-elevated border border-border-subtle text-text-secondary"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div className="pt-4 border-t border-border-subtle flex items-center justify-between">
-                <div className="flex items-center gap-1.5 text-xs text-emerald-400">
-                  <ShieldCheck className="w-3.5 h-3.5" />
-                  <span>Curriculum Completed</span>
-                </div>
-
-                {cert.credentialUrl && (
-                  <a
-                    href={cert.credentialUrl}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="flex items-center gap-1 text-xs text-text-muted hover:text-accent-cyan transition-colors"
-                  >
-                    <span>View Platform</span>
-                    <ExternalLink className="w-3 h-3" />
-                  </a>
-                )}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+          {/* Status Bar */}
+          <div className="retro-statusbar border-t border-[#808080] bg-[#C0C0C0] px-3 py-1">
+            <span>Certificates: 2 Active</span>
+            <span>Signature: SHA-256</span>
+            <span>Validity: Permanent</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   );
