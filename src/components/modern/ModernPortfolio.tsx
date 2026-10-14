@@ -7,6 +7,7 @@ import { ModernSkills } from './ModernSkills';
 import { ModernCertifications } from './ModernCertifications';
 import { ModernContact } from './ModernContact';
 import { ModernFooter } from './ModernFooter';
+import { VintageWorkstationSection } from './VintageWorkstationSection';
 import { CyberBackground } from './CyberBackground';
 import { ProjectModal } from '../ProjectModal';
 import { ResumeModal } from '../ResumeModal';
@@ -42,6 +43,9 @@ export const ModernPortfolio: React.FC<ModernPortfolioProps> = ({ onLaunchOS }) 
         <ModernProjects
           onSelectProject={(project) => setSelectedProject(project)}
         />
+
+        {/* Shafeek OS Vintage Workstation Section (Standalone) */}
+        <VintageWorkstationSection onLaunchOS={onLaunchOS} />
 
         {/* Experience & Engineering Journey */}
         <ModernExperience />

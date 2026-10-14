@@ -1,6 +1,5 @@
 import React from 'react';
-import { ArrowDown, Monitor, Sparkles, Gamepad2, Github, Linkedin } from 'lucide-react';
-import { InteractiveMonitor } from '../InteractiveMonitor';
+import { ArrowDown, Monitor, Gamepad2, Github, Linkedin } from 'lucide-react';
 
 interface ModernHeroProps {
   onLaunchOS: () => void;
@@ -102,17 +101,6 @@ export const ModernHero: React.FC<ModernHeroProps> = ({ onLaunchOS, onResumeClic
           >
             Download Resume
           </button>
-        </div>
-
-        {/* Interactive Computer Showcase Section */}
-        <div className="w-full mt-14">
-          <div className="flex items-center justify-center gap-2 mb-4 text-xs font-mono text-slate-400">
-            <Sparkles className="w-4 h-4 text-yellow-400" />
-            <span>Interactive Virtual Computer — Click inside to play or expand to Fullscreen</span>
-          </div>
-
-          {/* The Live Interactive Computer Monitor */}
-          <InteractiveMonitor onLaunchFullscreen={onLaunchOS} />
         </div>
       </div>
     </section>
