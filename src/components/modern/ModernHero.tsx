@@ -24,14 +24,14 @@ export const ModernHero: React.FC<ModernHeroProps> = ({ onLaunchOS, onResumeClic
           <span className="text-slate-400">CLEARANCE: FULL-STACK & AI SYSTEMS</span>
         </div>
 
-        {/* Cyberpunk Headline */}
+        {/* Headline */}
         <h1 className="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-white tracking-tight leading-[1.12] max-w-4xl font-sans">
-          Engineering <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#f43f5e] to-[#a855f7] drop-shadow-[0_0_35px_rgba(0,240,255,0.35)]">Resilient Full-Stack Systems</span> & AI Workflows
+          Building <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00f0ff] via-[#38bdf8] to-[#818cf8] drop-shadow-[0_0_35px_rgba(0,240,255,0.35)]">Full-Stack Applications</span> & AI-Powered Systems
         </h1>
 
-        {/* Cyberpunk Bio */}
-        <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-2xl leading-relaxed">
-          Hi, I'm <b className="text-white font-bold tracking-wide">Shafeek Latheef</b>. I build high-performance web applications, agentic pipelines with <b className="text-[#00f0ff] font-mono">LangGraph & FastAPI</b>, and interactive web games like{' '}
+        {/* Bio / Introduction */}
+        <p className="mt-6 text-base sm:text-lg text-slate-300 max-w-3xl leading-relaxed">
+          Hi, I'm <b className="text-white font-bold tracking-wide">Shafeek Latheef</b>. I'm a software engineer focused on building full-stack web applications, AI-powered workflows, and practical tools that solve real-world problems. I work with technologies like React, FastAPI, Node.js, and LangGraph, and I enjoy turning ideas into working products — from AI-driven systems to interactive projects like{' '}
           <a
             href="https://numberhunt.online/"
             target="_blank"
