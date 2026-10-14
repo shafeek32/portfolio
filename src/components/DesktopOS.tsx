@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { TopMenuBar } from './TopMenuBar';
 import { DesktopIcons } from './DesktopIcons';
 import { Taskbar, WindowMeta } from './Taskbar';
@@ -14,6 +14,7 @@ import { SettingsWindow } from './SettingsWindow';
 import { RecycleBinWindow } from './RecycleBinWindow';
 import { MinesweeperWindow } from './MinesweeperWindow';
 import { SnakeWindow } from './SnakeWindow';
+import { NumberHuntWindow } from './NumberHuntWindow';
 import { ProjectModal } from './ProjectModal';
 import { Project } from '../types';
 import { playRetroSound } from '../utils/sound';
@@ -26,23 +27,39 @@ interface WindowState {
   defaultPosition: { x: number; y: number };
 }
 
-export const DesktopOS: React.FC = () => {
+export interface DesktopOSProps {
+  isEmbedded?: boolean;
+  onToggleFullscreen?: () => void;
+  onExitFullscreen?: () => void;
+  initialWindowsOpen?: boolean;
+}
+
+export const DesktopOS: React.FC<DesktopOSProps> = ({
+  isEmbedded = false,
+  onToggleFullscreen,
+  onExitFullscreen,
+  initialWindowsOpen,
+}) => {
   const desktopCanvasRef = useRef<HTMLDivElement>(null);
 
-  // Global window states with authentic desktop OS coordinates matching reference screenshot
-  const [windows, setWindows] = useState<Record<string, WindowState>>({
-    about: { isOpen: true, isMinimized: false, isMaximized: false, zIndex: 12, defaultPosition: { x: 80, y: 8 } },
-    skills: { isOpen: true, isMinimized: false, isMaximized: false, zIndex: 11, defaultPosition: { x: 90, y: 310 } },
-    experience: { isOpen: true, isMinimized: false, isMaximized: false, zIndex: 10, defaultPosition: { x: 670, y: 8 } },
-    journey: { isOpen: true, isMinimized: false, isMaximized: false, zIndex: 9, defaultPosition: { x: 650, y: 280 } },
-    projects: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 8, defaultPosition: { x: 120, y: 20 } },
-    terminal: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 7, defaultPosition: { x: 160, y: 60 } },
-    resume: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 6, defaultPosition: { x: 140, y: 15 } },
-    contact: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 5, defaultPosition: { x: 200, y: 40 } },
-    settings: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 4, defaultPosition: { x: 240, y: 70 } },
-    recycle: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 3, defaultPosition: { x: 260, y: 90 } },
-    minesweeper: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 2, defaultPosition: { x: 280, y: 35 } },
-    snake: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, defaultPosition: { x: 300, y: 45 } },
+  // Global window states with authentic desktop OS coordinates
+  const [windows, setWindows] = useState<Record<string, WindowState>>(() => {
+    const isClean = isEmbedded || initialWindowsOpen === false;
+    return {
+      about: { isOpen: true, isMinimized: false, isMaximized: false, zIndex: 12, defaultPosition: { x: isEmbedded ? 40 : 80, y: isEmbedded ? 8 : 8 } },
+      skills: { isOpen: !isClean, isMinimized: false, isMaximized: false, zIndex: 11, defaultPosition: { x: 90, y: 310 } },
+      experience: { isOpen: !isClean, isMinimized: false, isMaximized: false, zIndex: 10, defaultPosition: { x: 670, y: 8 } },
+      journey: { isOpen: !isClean, isMinimized: false, isMaximized: false, zIndex: 9, defaultPosition: { x: 650, y: 280 } },
+      projects: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 8, defaultPosition: { x: 120, y: 20 } },
+      terminal: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 7, defaultPosition: { x: 160, y: 60 } },
+      numberhunt: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 13, defaultPosition: { x: isEmbedded ? 30 : 140, y: isEmbedded ? 20 : 30 } },
+      resume: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 6, defaultPosition: { x: 140, y: 15 } },
+      contact: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 5, defaultPosition: { x: 200, y: 40 } },
+      settings: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 4, defaultPosition: { x: 240, y: 70 } },
+      recycle: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 3, defaultPosition: { x: 260, y: 90 } },
+      minesweeper: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 2, defaultPosition: { x: 280, y: 35 } },
+      snake: { isOpen: false, isMinimized: false, isMaximized: false, zIndex: 1, defaultPosition: { x: 300, y: 45 } },
+    };
   });
 
   const [activeWindowId, setActiveWindowId] = useState<string | null>('about');
@@ -113,6 +130,17 @@ export const DesktopOS: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    if (!onExitFullscreen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        onExitFullscreen();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [onExitFullscreen]);
+
   // Build open windows list for Taskbar
   const openWindowsMeta: WindowMeta[] = [
     { id: 'about', title: 'About_Shafeek.exe', icon: 'monitor' as const, isOpen: windows.about.isOpen, isMinimized: windows.about.isMinimized },
@@ -121,6 +149,7 @@ export const DesktopOS: React.FC = () => {
     { id: 'experience', title: 'Clients_Trusted.txt', icon: 'document' as const, isOpen: windows.experience.isOpen, isMinimized: windows.experience.isMinimized },
     { id: 'journey', title: 'Featured_Posts.log', icon: 'document' as const, isOpen: windows.journey.isOpen, isMinimized: windows.journey.isMinimized },
     { id: 'terminal', title: 'Terminal', icon: 'terminal' as const, isOpen: windows.terminal.isOpen, isMinimized: windows.terminal.isMinimized },
+    { id: 'numberhunt', title: 'Number_Hunt.exe', icon: 'star' as const, isOpen: windows.numberhunt?.isOpen, isMinimized: windows.numberhunt?.isMinimized },
     { id: 'resume', title: 'Resume.pdf', icon: 'pdf' as const, isOpen: windows.resume.isOpen, isMinimized: windows.resume.isMinimized },
     { id: 'contact', title: 'Contact_Me.exe', icon: 'mail' as const, isOpen: windows.contact.isOpen, isMinimized: windows.contact.isMinimized },
     { id: 'settings', title: 'Control_Panel', icon: 'settings' as const, isOpen: windows.settings.isOpen, isMinimized: windows.settings.isMinimized },
@@ -130,9 +159,25 @@ export const DesktopOS: React.FC = () => {
   ].filter((w) => w.isOpen);
 
   return (
-    <div className={`h-screen w-screen max-h-screen overflow-hidden fixed inset-0 flex flex-col select-none ${scanlines ? 'crt-scanlines' : ''}`}>
+    <div
+      className={`${
+        isEmbedded
+          ? 'relative w-full h-full'
+          : 'fixed inset-0 h-screen w-screen max-h-screen z-50'
+      } overflow-hidden flex flex-col select-none ${scanlines ? 'crt-scanlines' : ''}`}
+    >
+      {onExitFullscreen && (
+        <button
+          onClick={onExitFullscreen}
+          className="fixed top-2 right-2 z-[9999] bg-[#ff2a5f] hover:bg-[#ff4f7e] text-white font-mono text-xs px-3 py-1.5 shadow-lg border border-white/40 flex items-center gap-1.5 active:scale-95 transition-all"
+        >
+          <span>✕</span>
+          <span className="font-bold">EXIT_FULLSCREEN (ESC)</span>
+        </button>
+      )}
+
       {/* Pixel Art Desktop Wallpaper Background */}
-      <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none">
+      <div className={`${isEmbedded ? 'absolute' : 'fixed'} inset-0 z-0 overflow-hidden pointer-events-none`}>
         {bgMode === 'image' ? (
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat pixel-art-rendering"
@@ -148,8 +193,21 @@ export const DesktopOS: React.FC = () => {
       </div>
 
       {/* Top System Menu Bar */}
-      <div className="shrink-0 z-50">
-        <TopMenuBar onOpenWindow={handleOpenWindow} activeWindowId={activeWindowId} />
+      <div className="shrink-0 z-50 relative flex items-center justify-between bg-[#C0C0C0]">
+        <div className="flex-1 min-w-0">
+          <TopMenuBar onOpenWindow={handleOpenWindow} activeWindowId={activeWindowId} />
+        </div>
+        {isEmbedded && onToggleFullscreen && (
+          <button
+            type="button"
+            onClick={onToggleFullscreen}
+            className="hidden sm:flex items-center gap-1 mr-1.5 px-2 py-0.5 bg-[#000080] text-white text-[10px] font-mono font-bold hover:bg-[#1084D0] border border-white cursor-pointer"
+            title="Expand Fullscreen OS"
+          >
+            <span>⛶</span>
+            <span>Maximize</span>
+          </button>
+        )}
       </div>
 
       {/* Main OS Desktop Canvas (100% Fixed Non-Scrolling Workspace) */}
@@ -422,6 +480,27 @@ export const DesktopOS: React.FC = () => {
               onClose={() => handleCloseWindow('snake')}
               dragConstraintsRef={desktopCanvasRef}
               className="w-[340px] max-w-[88vw]"
+            />
+          </div>
+
+          {/* 13. Number_Hunt.exe */}
+          <div
+            className="absolute transition-none"
+            style={{
+              left: `${windows.numberhunt.defaultPosition.x}px`,
+              top: `${windows.numberhunt.defaultPosition.y}px`,
+              zIndex: windows.numberhunt.zIndex,
+            }}
+          >
+            <NumberHuntWindow
+              isOpen={windows.numberhunt.isOpen}
+              isActive={activeWindowId === 'numberhunt'}
+              isMinimized={windows.numberhunt.isMinimized}
+              onFocus={() => bringToFront('numberhunt')}
+              onMinimize={() => handleMinimizeWindow('numberhunt')}
+              onClose={() => handleCloseWindow('numberhunt')}
+              dragConstraintsRef={desktopCanvasRef}
+              className="w-[620px] max-w-[92vw]"
             />
           </div>
         </div>

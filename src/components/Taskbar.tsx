@@ -57,12 +57,12 @@ export const Taskbar: React.FC<TaskbarProps> = ({
   }, [isStartOpen]);
 
   return (
-    <>
+    <div className="relative w-full shrink-0 select-none font-mono">
       {/* Retro Start Menu Popup */}
       {isStartOpen && (
         <div
           onClick={(e) => e.stopPropagation()}
-          className="fixed bottom-10 left-2 z-50 w-64 bg-[#C0C0C0] retro-window-frame p-1 shadow-2xl flex font-mono"
+          className="absolute bottom-10 left-2 z-50 w-64 bg-[#C0C0C0] retro-window-frame p-1 shadow-2xl flex font-mono"
         >
           {/* Left Vertical OS Banner Strip */}
           <div className="w-7 bg-gradient-to-t from-[#000080] via-[#1084d0] to-[#000080] flex items-end justify-center pb-3 select-none shrink-0 overflow-hidden">
@@ -204,7 +204,7 @@ export const Taskbar: React.FC<TaskbarProps> = ({
       )}
 
       {/* Main Bottom Taskbar */}
-      <footer className="fixed bottom-0 left-0 right-0 z-40 bg-[#C0C0C0] border-t-2 border-white shadow-[0_-2px_0px_#808080] select-none font-mono">
+      <footer className="w-full relative z-40 bg-[#C0C0C0] border-t-2 border-white shadow-[0_-2px_0px_#808080] select-none font-mono">
         <div className="h-9 px-1.5 flex items-center justify-between gap-2">
           {/* Left: Start Button + Open Windows List */}
           <div className="flex items-center gap-1.5 overflow-x-auto no-scrollbar flex-1 min-w-0">
@@ -269,6 +269,6 @@ export const Taskbar: React.FC<TaskbarProps> = ({
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };

@@ -2,6 +2,40 @@ import { Project } from '../types';
 
 export const projects: Project[] = [
   {
+    id: 'number-hunt',
+    title: 'Number Hunt',
+    badge: 'Live Web Game',
+    shortDescription: 'Fast-paced, responsive brain-training web game challenging players to spot and sequence target numbers against dynamic timers with real-time scoring.',
+    highlight: 'Live Production Web Game (Played Globally)',
+    category: 'Full-Stack',
+    role: 'Creator & Full-Stack Developer',
+    technologies: ['React', 'TypeScript', 'Tailwind CSS', 'Vite', 'Web Audio API', 'Game Loop Architecture'],
+    githubUrl: 'https://github.com/shafeek32',
+    liveUrl: 'https://numberhunt.online/',
+    image: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    featured: true,
+    overview: 'Number Hunt is an addictive, real-time cognitive agility and pattern-recognition browser game deployed live at numberhunt.online. Players race against a dynamic countdown timer to find scrambled numerical sequences, testing spatial focus, reflex speed, and mental agility.',
+    problem: 'Many web-based casual games suffer from sluggish bundle sizes, intrusive ads, poor mobile touch support, and input latency that disrupts gameplay flow.',
+    solution: 'Engineered an ultra-lightweight, 60 FPS responsive web game from scratch using React and TypeScript. Features procedural number matrix generation, zero-latency state transitions, tactile audio feedback, and seamless touch controls across all device sizes.',
+    keyFeatures: [
+      'Procedural Grid Generation: Dynamic matrix layouts with adaptive difficulty scaling.',
+      'Precision Combo & Speed Scoring: Algorithmic multipliers rewarding rapid visual recognition.',
+      '100% Mobile & Touch Optimized: Flawless touch hit-targets for phones, tablets, and desktop browsers.',
+      'Audio & Visual Feedback: Integrated Web Audio sound effects and celebratory animations.',
+      'Zero-Latency Client State: Instant restarts and high-frame-rate rendering powered by modern React.'
+    ],
+    architecture: 'Modular React + TypeScript architecture bundled with Vite for sub-second loads and edge CDN distribution on Cloudflare. Engineered with zero external game engine dependencies for maximum lightweight performance.',
+    challenges: [
+      'Maintaining 60 FPS smooth rendering during rapid grid DOM re-renders and active timer ticks.',
+      'Optimizing tap event latency and preventing accidental pinch/scroll on mobile devices.'
+    ],
+    whatILearned: [
+      'High-performance game loop patterns and reactive state management in React.',
+      'Designing accessible, satisfying touch-first user interfaces for casual gaming.',
+      'Production DNS routing, custom domain provisioning, and edge caching at scale.'
+    ]
+  },
+  {
     id: 'ai-complaint-management',
     title: 'AI Customer Complaint Management System',
     shortDescription: 'Enterprise-grade AI complaint management system that automates ticket triage, multi-modal document extraction, and resolution workflows using OCR and LLM agents.',

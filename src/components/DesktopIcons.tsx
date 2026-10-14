@@ -19,6 +19,7 @@ export const DESKTOP_SHORTCUTS: DesktopShortcut[] = [
   { id: 'experience', label: 'About.txt', icon: 'document' },
   { id: 'skills', label: 'Skills.sys', icon: 'gear' },
   { id: 'terminal', label: 'Terminal', icon: 'terminal' },
+  { id: 'numberhunt', label: 'Number Hunt', icon: 'star' },
   { id: 'minesweeper', label: 'Minesweeper', icon: 'star' },
   { id: 'resume', label: 'Resume.pdf', icon: 'pdf' },
   { id: 'contact', label: 'Contact.exe', icon: 'mail' },

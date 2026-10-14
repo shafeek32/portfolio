@@ -11,15 +11,20 @@
     --color-titlebar-end: #1084D0;
   }
 
-  html, body, #root {
-    height: 100%;
+  html, body {
+    min-height: 100%;
     width: 100%;
-    overflow: hidden;
     margin: 0;
     padding: 0;
-    background-color: #120e2e;
-    color: #000000;
-    font-family: 'Plus Jakarta Sans', 'MS Sans Serif', 'Arial', sans-serif;
+    background-color: #050711;
+    color: #e2e8f0;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+    scroll-behavior: smooth;
+  }
+
+  #root {
+    min-height: 100%;
+    width: 100%;
   }
 
   /* Retro OS Scrollbar */
@@ -289,3 +294,54 @@
     text-decoration: none !important;
   }
 }
+
+/* Cyberpunk Aesthetic Utilities */
+.cyber-grid {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 240, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 240, 255, 0.04) 1px, transparent 1px);
+}
+
+.cyber-card {
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 240, 255, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card:hover {
+  border-color: rgba(0, 240, 255, 0.6);
+  box-shadow: 0 0 30px rgba(0, 240, 255, 0.18), inset 0 0 15px rgba(0, 240, 255, 0.05);
+}
+
+.cyber-card-pink {
+  background: rgba(10, 14, 26, 0.8);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 0, 127, 0.25);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cyber-card-pink:hover {
+  border-color: rgba(255, 0, 127, 0.7);
+  box-shadow: 0 0 30px rgba(255, 0, 127, 0.2), inset 0 0 15px rgba(255, 0, 127, 0.05);
+}
+
+.cyber-glow-cyan {
+  box-shadow: 0 0 20px rgba(0, 240, 255, 0.4);
+}
+
+.cyber-glow-pink {
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.4);
+}
+
+.cyber-text-cyan {
+  color: #00f0ff;
+  text-shadow: 0 0 10px rgba(0, 240, 255, 0.6);
+}
+
+.cyber-text-pink {
+  color: #ff007f;
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.6);
+}
+
